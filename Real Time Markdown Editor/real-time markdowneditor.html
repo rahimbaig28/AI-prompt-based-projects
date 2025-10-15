@@ -1,0 +1,241 @@
+<!-- 
+Prompt!
+
+Create a single-page HTML app where I can type Markdown on the 
+left and see the formatted output on the right in real-time using JavaScript. 
+Include styling for code blocks, headers, and bold/italic text.
+-->
+
+<!-- 
+Real-time Markdown Editor
+
+A simple, single-page web application that provides a real-time preview for Markdown editing. It features a clean, split-screen layout with the Markdown input on the left and the rendered HTML output on the right. This project is built with vanilla JavaScript and runs entirely in the browser—no server-side processing is needed.
+
+Features
+
+Live Preview: Instantly see the formatted output as you type your Markdown.
+
+Clean UI: A modern and minimalist interface styled with Tailwind CSS.
+
+Full Markdown Support: Utilizes marked.js to support standard Markdown syntax, including:
+
+Headers
+
+Bold and Italic text
+
+Lists (ordered and unordered)
+
+Blockquotes
+
+Code blocks and inline code
+
+Links
+
+Responsive: The layout is fully responsive and works well on desktop and mobile devices.
+
+Self-Contained: Everything is in a single index.html file, making it incredibly portable and easy to use.
+
+Tech Stack
+
+HTML: For the basic structure and content.
+
+Tailwind CSS: For utility-first styling and a responsive layout.
+
+JavaScript (Vanilla): For capturing user input and updating the preview pane.
+
+marked.js: A fast and lightweight library for parsing Markdown and converting it into HTML.
+
+How to Use
+
+Clone or download this repository.
+
+Open the index.html file directly in your favorite web browser (like Chrome, Firefox, or Edge).
+
+That's it! You can start writing Markdown immediately.
+-->
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Real-time Markdown Editor</title>
+    <!-- Tailwind CSS for styling the layout -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- marked.js for Markdown to HTML conversion -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <!-- Google Fonts for a clean, modern look -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        /* Custom styling for the editor and rendered output */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc; /* gray-50 */
+        }
+
+        #markdown-input, #html-output {
+            height: calc(100vh - 8rem);
+            overflow-y: auto;
+        }
+
+        /* Styling for the rendered HTML content in the preview pane */
+        .markdown-body h1 {
+            font-size: 2.25em;
+            font-weight: 700;
+            border-bottom: 1px solid #e2e8f0;
+            padding-bottom: 0.3em;
+            margin-top: 1.5em;
+            margin-bottom: 0.5em;
+        }
+        .markdown-body h2 {
+            font-size: 1.75em;
+            font-weight: 700;
+            border-bottom: 1px solid #e2e8f0;
+            padding-bottom: 0.3em;
+            margin-top: 1.25em;
+            margin-bottom: 0.5em;
+        }
+        .markdown-body h3 {
+            font-size: 1.5em;
+            font-weight: 700;
+            margin-top: 1em;
+            margin-bottom: 0.5em;
+        }
+        .markdown-body p {
+            line-height: 1.6;
+            margin-bottom: 1em;
+        }
+        .markdown-body strong {
+            font-weight: 700;
+        }
+        .markdown-body em {
+            font-style: italic;
+        }
+        .markdown-body ul, .markdown-body ol {
+            padding-left: 2em;
+            margin-bottom: 1em;
+        }
+        .markdown-body li {
+            margin-bottom: 0.25em;
+        }
+        .markdown-body blockquote {
+            border-left: 4px solid #cbd5e1; /* gray-300 */
+            padding-left: 1em;
+            margin-left: 0;
+            color: #475569; /* gray-600 */
+            font-style: italic;
+        }
+        .markdown-body pre {
+            background-color: #1e293b; /* gray-800 */
+            color: #e2e8f0; /* gray-200 */
+            padding: 1rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+            margin-bottom: 1em;
+        }
+        .markdown-body code {
+            font-family: 'Fira Code', monospace;
+            background-color: #e2e8f0; /* gray-200 */
+            padding: 0.2em 0.4em;
+            border-radius: 0.25rem;
+            font-size: 0.9em;
+        }
+        .markdown-body pre code {
+            background-color: transparent;
+            padding: 0;
+            border-radius: 0;
+            font-size: 1em;
+        }
+        .markdown-body a {
+            color: #2563eb; /* blue-600 */
+            text-decoration: underline;
+        }
+        .markdown-body a:hover {
+            color: #1d4ed8; /* blue-700 */
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+
+    <div class="container mx-auto p-4">
+        <header class="text-center mb-6">
+            <h1 class="text-4xl font-bold text-gray-800">Markdown Live Editor</h1>
+            <p class="text-gray-500 mt-1">Type your Markdown on the left and see the result on the right.</p>
+        </header>
+
+        <!-- Main grid for editor and preview -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            
+            <!-- Markdown Input Area -->
+            <div>
+                <label for="markdown-input" class="block text-sm font-medium text-gray-700 mb-2">Markdown</label>
+                <textarea 
+                    id="markdown-input" 
+                    class="w-full p-4 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 font-mono text-sm"
+                    aria-label="Markdown Input"
+                ></textarea>
+            </div>
+
+            <!-- HTML Output Area -->
+            <div>
+                <label for="html-output" class="block text-sm font-medium text-gray-700 mb-2">Preview</label>
+                <div 
+                    id="html-output" 
+                    class="w-full p-4 border border-gray-300 rounded-lg bg-white shadow-sm markdown-body"
+                    aria-label="HTML Output"
+                ></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const markdownInput = document.getElementById('markdown-input');
+        const htmlOutput = document.getElementById('html-output');
+
+        // Initial content to demonstrate features
+        const initialMarkdown = `# Welcome to the Markdown Editor!
+
+## This is a real-time preview
+Type in the left panel and see the results on the right.
+
+### Key Features
+* **Bold text** and *italic text*
+* Lists for organization
+* \`Inline code snippets\`
+
+> Blockquotes are great for highlighting important information or quotes from others.
+
+### Code Blocks
+Here's an example of a JavaScript code block:
+\`\`\`javascript
+function greet(name) {
+  // Use template literals for easy string formatting
+  console.log(\`Hello, \${name}!\`);
+}
+
+greet('World');
+\`\`\`
+
+You can try editing this text to see how it works!
+`;
+
+        // Function to render markdown
+        function renderMarkdown() {
+            const markdownText = markdownInput.value;
+            htmlOutput.innerHTML = marked.parse(markdownText);
+        }
+
+        // Set initial value and render it
+        markdownInput.value = initialMarkdown;
+        renderMarkdown();
+
+        // Add event listener for real-time updates
+        markdownInput.addEventListener('input', renderMarkdown);
+
+    </script>
+
+</body>
+</html>
