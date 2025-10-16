@@ -24,7 +24,7 @@ Exploring modern AI integration, I connected my visualizer to the **Gemini API**
 
 ## 🌱 What's Next
 
-I’m diving deeper into the world of **Artificial Intelligence** and **Machine Learning** — focusing on **prompt-based AI projects** that harness the power of Large Language Models (LLMs).
+I’m diving deeper into the world of **Artificial Intelligence** and **Machine Learning** focusing on **prompt-based AI projects** that harness the power of Large Language Models (LLMs).
 
 ### My upcoming goals include:
 - 🧠 Building tools that use
