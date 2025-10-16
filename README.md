@@ -27,4 +27,17 @@ Exploring modern AI integration, I connected my visualizer to the **Gemini API**
 I’m diving deeper into the world of **Artificial Intelligence** and **Machine Learning** focusing on **prompt-based AI projects** that harness the power of Large Language Models (LLMs).
 
 ### My upcoming goals include:
-- 🧠 Building tools that use
+- 🧠 Building tools that use **natural language prompts** to generate code, content, or visuals  
+- ⚙️ Developing **smart assistants** that automate complex workflows  
+- 🎨 Creating **unique user experiences** powered by **generative AI**
+
+---
+
+## 📫 How to Reach Me
+
+I’m always open to connecting, collaborating, or just chatting about technology.  
+📧 **Email:** [rahimbaig00332211@gmail.com](mailto:rahimbaig00332211@gmail.com)
+
+---
+
+⭐ *Thanks for visiting my profile feel free to explore my repositories and reach out!*
