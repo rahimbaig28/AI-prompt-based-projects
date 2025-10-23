@@ -1,0 +1,1050 @@
+<!-- 
+Prompt!!
+
+Write a single-page HTML application named "Flashcards Studio". All CSS and JavaScript must be included in the single .html file.
+
+Core Requirements:
+
+Styling: Use Tailwind CSS (loaded from a CDN) to create a clean, modern, and responsive layout that works on both mobile and desktop.
+
+Deck Management:
+
+Allow users to create new decks.
+
+The main view should be a list of all decks, displaying statistics for each: Total Cards, New, Due Today, and Mature.
+
+Card Management (in Modals):
+
+Add Cards: A modal to add cards with a 'Front' and 'Back'.
+
+Bulk Import: A modal to import cards from CSV text, using the format front,back (one card per line).
+
+Import/Export: A 'Manage' modal for each deck with options to Export to JSON and Import from JSON.
+
+Delete Deck: A "Delete" button in the 'Manage' modal, which opens a confirmation modal.
+
+Study Mode:
+
+When a "Study" button is clicked, start a session with new/due cards.
+
+Display one card at a time (front side) with a session progress bar.
+
+Simple Review: The user can click the card or press [Space] to flip it.
+
+Next Card: Once flipped, a "Next" button must appear. The user can click "Next" or press [Space] again to advance to the next card. 
+(Do not include "Again/Hard/Good/Easy" grading buttons).
+
+Cram Mode:
+
+If a deck has no cards due, the "Study" button should change to "Study All (Cram)" to review all cards.
+
+On the "Session Complete" screen, add a "Study Again (Cram)" button.
+
+Persistence: All decks and cards must be saved to localStorage.
+
+Spaced Repetition Data: The card objects should still include fields for spaced repetition (like dueDate, easinessFactor, interval)
+even though the grading buttons are removed, as this data is used for the "Due Today" and "New" stats.
+ -->
+ 
+ 
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flashcards Studio</title>
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                },
+            },
+        }
+    </script>
+    <style>
+        /* Custom styles for the flashcard flip animation */
+        .card-inner {
+            transform-style: preserve-3d;
+            transition: transform 0.6s;
+        }
+        .is-flipped {
+            transform: rotateY(180deg);
+        }
+        .card-face {
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1.5rem; /* p-6 */
+            overflow-y: auto;
+        }
+        .card-back {
+            transform: rotateY(180deg);
+        }
+        
+        /* Custom styles for modal overlay */
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            background-color: rgba(0, 0, 0, 0.6);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 50;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+        .modal-overlay.is-visible {
+            opacity: 1;
+            visibility: visible;
+        }
+        .modal-content {
+            background-color: white;
+            border-radius: 0.5rem; /* rounded-lg */
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); /* shadow-lg */
+            padding: 1.5rem; /* p-6 */
+            width: 100%;
+            max-width: 28rem; /* max-w-md */
+            transform: scale(0.95);
+            transition: transform 0.3s ease;
+        }
+        .modal-overlay.is-visible .modal-content {
+            transform: scale(1);
+        }
+    </style>
+</head>
+<body class="bg-gray-100 font-sans text-gray-900 antialiased">
+
+    <!-- Main Application Container -->
+    <div id="app-container" class="container mx-auto p-4 md:p-8">
+        <!-- This content will be dynamically rendered by JavaScript -->
+    </div>
+    
+    <!-- Modal Container -->
+    <div id="modal-container">
+        <!-- Modals will be dynamically rendered here -->
+    </div>
+
+    <script>
+        // --- APPLICATION LOGIC ---
+
+        const app = {
+            // --- STATE ---
+            state: {
+                decks: [],
+                currentView: 'deckList', // 'deckList' or 'study'
+                currentDeckId: null,
+                modal: null, // null, 'createDeck', 'addCards', 'manageDeck', 'csvImport', 'jsonImport', 'confirmDelete'
+                studySession: {
+                    queue: [],
+                    currentCard: null,
+                    isFlipped: false,
+                    totalInSession: 0,
+                    completedCount: 0
+                },
+                pendingDeleteDeckId: null
+            },
+
+            // --- CORE METHODS ---
+            
+            /**
+             * Initializes the application
+             */
+            init() {
+                this.loadData();
+                document.addEventListener('keydown', this.handleKeydown.bind(this));
+                this.render();
+            },
+
+            /**
+             * Saves the current deck state to localStorage
+             */
+            saveData() {
+                try {
+                    const data = JSON.stringify({ decks: this.state.decks });
+                    localStorage.setItem('flashcardsStudioData', data);
+                } catch (error) {
+                    console.error("Failed to save data to localStorage:", error);
+                    // Handle potential quota errors later
+                }
+            },
+
+            /**
+             * Loads deck data from localStorage
+             */
+            loadData() {
+                const data = localStorage.getItem('flashcardsStudioData');
+                if (data) {
+                    try {
+                        this.state.decks = JSON.parse(data).decks || [];
+                        // Data migration: Ensure all cards have new properties
+                        this.state.decks.forEach(deck => {
+                            deck.cards.forEach(card => {
+                                if (card.repetitions === undefined) card.repetitions = 0;
+                                if (card.easinessFactor === undefined) card.easinessFactor = 2.5;
+                                if (card.interval === undefined) card.interval = 0;
+                                if (card.dueDate === undefined) card.dueDate = null;
+                            });
+                        });
+                    } catch (error) {
+                        console.error("Failed to parse data from localStorage:", error);
+                        this.state.decks = [];
+                    }
+                }
+            },
+            
+            /**
+             * Generates a simple unique ID
+             */
+            uuid() {
+                return `f${Date.now().toString(16)}-${Math.random().toString(16).substring(2, 8)}`;
+            },
+
+            /**
+             * Gets today's date as a YYYY-MM-DD string
+             */
+            getTodayString() {
+                return new Date().toISOString().split('T')[0];
+            },
+            navigateTo(view, deckId = null, isCram = false) {
+                this.state.currentView = view;
+                this.state.currentDeckId = deckId;
+                this.state.modal = null; // Close any open modals
+                
+                if (view === 'study' && deckId) {
+                    if (isCram) {
+                        this.startCramSession(deckId);
+                    } else {
+                        this.startStudySession(deckId);
+                    }
+                    // The startSession functions handle their own render, so we exit early.
+                    return; 
+                } else if (view === 'deckList') {
+                    this.state.currentDeckId = null;
+                    this.state.studySession = this.getInitialStudySessionState();
+                }
+                
+                this.render();
+            },
+            
+            /**
+             * Opens a modal overlay
+             */
+            openModal(modalType, deckId = null) {
+                this.state.modal = modalType;
+                if (deckId) {
+                    this.state.currentDeckId = deckId;
+                }
+                if (modalType === 'confirmDelete' && deckId) {
+                    this.state.pendingDeleteDeckId = deckId;
+                }
+                this.renderModal();
+            },
+
+            /**
+             * Closes the currently active modal
+             */
+            closeModal() {
+                this.state.modal = null;
+                this.state.pendingDeleteDeckId = null;
+                this.renderModal(); // This will clear the modal
+            },
+
+            // --- RENDERING ---
+
+            /**
+             * Main render function
+             */
+            render() {
+                const container = document.getElementById('app-container');
+                container.innerHTML = ''; // Clear previous content
+                
+                // Render Header
+                container.appendChild(this.renderHeader());
+                
+                // Render Current View
+                if (this.state.currentView === 'deckList') {
+                    container.appendChild(this.renderDeckList());
+                } else if (this.state.currentView === 'study') {
+                    container.appendChild(this.renderStudyView());
+                }
+            },
+
+            /**
+             * Renders the header component
+             */
+            renderHeader() {
+                const header = document.createElement('header');
+                header.className = 'flex flex-col sm:flex-row justify-between items-center mb-6 pb-4 border-b border-gray-300';
+                
+                const title = document.createElement('h1');
+                title.className = 'text-3xl font-bold text-blue-700 mb-4 sm:mb-0 cursor-pointer';
+                title.textContent = 'Flashcards Studio';
+                title.onclick = () => this.navigateTo('deckList');
+                header.appendChild(title);
+                
+                if (this.state.currentView === 'deckList') {
+                    const createButton = this.createButton('Create New Deck', () => this.openModal('createDeck'), 'bg-blue-600 text-white');
+                    header.appendChild(createButton);
+                } else if (this.state.currentView === 'study') {
+                    const endButton = this.createButton('End Session', () => this.navigateTo('deckList'), 'bg-red-600 text-white');
+                    header.appendChild(endButton);
+                }
+                
+                return header;
+            },
+
+            /**
+             * Renders the list of decks
+             */
+            renderDeckList() {
+                const fragment = document.createDocumentFragment();
+                
+                if (this.state.decks.length === 0) {
+                    const emptyState = document.createElement('div');
+                    emptyState.className = 'text-center text-gray-500 bg-white p-10 rounded-lg shadow';
+                    emptyState.innerHTML = `
+                        <p class="text-xl mb-4">No decks found.</p>
+                        <p>Click "Create New Deck" to get started!</p>
+                    `;
+                    fragment.appendChild(emptyState);
+                    return fragment;
+                }
+                
+                const grid = document.createElement('div');
+                grid.className = 'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6';
+                
+                this.state.decks.forEach(deck => {
+                    const deckEl = document.createElement('div');
+                    deckEl.className = 'bg-white p-6 rounded-lg shadow-lg flex flex-col justify-between';
+                    
+                    const deckName = document.createElement('h2');
+                    deckName.className = 'text-2xl font-semibold mb-4 truncate';
+                    deckName.textContent = deck.name;
+                    
+                    const stats = this.getDeckStats(deck);
+                    const statsEl = document.createElement('div');
+                    statsEl.className = 'grid grid-cols-2 gap-4 mb-6 text-center';
+                    statsEl.innerHTML = `
+                        <div class="bg-blue-50 p-3 rounded-lg">
+                            <div class="text-sm font-medium text-blue-600">DUE TODAY</div>
+                            <div class="text-2xl font-bold text-blue-900">${stats.dueToday}</div>
+                        </div>
+                        <div class="bg-green-50 p-3 rounded-lg">
+                            <div class="text-sm font-medium text-green-600">NEW</div>
+                            <div class="text-2xl font-bold text-green-900">${stats.newCards}</div>
+                        </div>
+                        <div class="bg-purple-50 p-3 rounded-lg">
+                            <div class="text-sm font-medium text-purple-600">MATURE</div>
+                            <div class="text-2xl font-bold text-purple-900">${stats.mature}</div>
+                        </div>
+                        <div class="bg-gray-100 p-3 rounded-lg">
+                            <div class="text-sm font-medium text-gray-500">TOTAL</div>
+                            <div class="text-2xl font-bold text-gray-800">${deck.cards.length}</div>
+                        </div>
+                    `;
+                    
+                    const buttonsEl = document.createElement('div');
+                    buttonsEl.className = 'flex flex-col sm:flex-row gap-2';
+                    
+                    const dueCount = stats.dueToday + stats.newCards;
+                    let studyButton;
+
+                    if (dueCount > 0) {
+                        studyButton = this.createButton(`Study (${dueCount})`, () => this.navigateTo('study', deck.id), 'bg-green-600 text-white flex-1');
+                    } else if (deck.cards.length > 0) {
+                        // No cards due, but deck is not empty
+                        studyButton = this.createButton('Study All (Cram)', () => this.navigateTo('study', deck.id, true), 'bg-blue-600 text-white flex-1');
+                        studyButton.title = "No cards due. Study all cards in 'cram' mode.";
+                    } else {
+                        // Deck is empty
+                        studyButton = this.createButton('Study', () => {}, 'bg-green-600 text-white flex-1');
+                        studyButton.disabled = true;
+                        studyButton.classList.add('opacity-50', 'cursor-not-allowed');
+                        studyButton.title = "Add cards to study.";
+                    }
+                    
+                    const addCardButton = this.createButton('Add', () => this.openModal('addCards', deck.id), 'bg-gray-200 text-gray-800 flex-1');
+                    const manageButton = this.createButton('Manage', () => this.openModal('manageDeck', deck.id), 'bg-gray-200 text-gray-800 flex-1');
+                    
+                    buttonsEl.appendChild(studyButton);
+                    buttonsEl.appendChild(addCardButton);
+                    buttonsEl.appendChild(manageButton);
+
+                    deckEl.appendChild(deckName);
+                    deckEl.appendChild(statsEl);
+                    deckEl.appendChild(buttonsEl);
+                    
+                    grid.appendChild(deckEl);
+                });
+                
+                fragment.appendChild(grid);
+                return fragment;
+            },
+            
+            /**
+             * Renders the study view
+             */
+            renderStudyView() {
+                const session = this.state.studySession;
+                const deck = this.state.decks.find(d => d.id === this.state.currentDeckId);
+                
+                const wrapper = document.createElement('div');
+                wrapper.className = 'max-w-2xl mx-auto';
+                
+                const deckTitle = document.createElement('h2');
+                deckTitle.className = 'text-2xl font-semibold text-center mb-2';
+                deckTitle.textContent = deck.name;
+                wrapper.appendChild(deckTitle);
+
+                // Progress Bar
+                const progressWrapper = document.createElement('div');
+                progressWrapper.className = 'w-full bg-gray-200 rounded-full h-2.5 mb-4';
+                const progressBar = document.createElement('div');
+                const progressPercent = session.totalInSession > 0 ? (session.completedCount / session.totalInSession) * 100 : 0;
+                progressBar.className = 'bg-blue-600 h-2.5 rounded-full transition-all duration-300';
+                progressBar.style.width = `${progressPercent}%`;
+                progressWrapper.appendChild(progressBar);
+                wrapper.appendChild(progressWrapper);
+                
+                const progressText = document.createElement('p');
+                progressText.className = 'text-center text-gray-600 mb-4';
+                progressText.textContent = `${session.completedCount} / ${session.totalInSession} cards completed`;
+                wrapper.appendChild(progressText);
+                
+                if (session.currentCard) {
+                    // Render the flashcard
+                    const cardContainer = document.createElement('div');
+                    cardContainer.className = 'relative aspect-video w-full cursor-pointer rounded-lg shadow-xl bg-white';
+                    cardContainer.style.perspective = '1000px';
+                    cardContainer.onclick = () => this.flipCard();
+                    
+                    const cardInner = document.createElement('div');
+                    cardInner.className = 'card-inner relative w-full h-full text-center rounded-lg';
+                    if (session.isFlipped) {
+                        cardInner.classList.add('is-flipped');
+                    }
+                    
+                    const cardFront = document.createElement('div');
+                    cardFront.className = 'card-face card-front bg-white border-2 border-gray-200 rounded-lg';
+                    cardFront.textContent = session.currentCard.front;
+                    
+                    const cardBack = document.createElement('div');
+                    cardBack.className = 'card-face card-back bg-gray-50 border-2 border-gray-200 rounded-lg';
+                    cardBack.textContent = session.currentCard.back;
+                    
+                    cardInner.appendChild(cardFront);
+                    cardInner.appendChild(cardBack);
+                    cardContainer.appendChild(cardInner);
+                    wrapper.appendChild(cardContainer);
+                    
+                    // Render next button (if flipped)
+                    if (session.isFlipped) {
+                        const nextButton = this.createButton('Next [Space]', () => this.advanceCard(), 'bg-blue-600 text-white w-full mt-6');
+                        wrapper.appendChild(nextButton);
+                    } else {
+                        // Show "Click to flip" helper
+                        const helperText = document.createElement('p');
+                        helperText.className = 'text-center text-gray-500 mt-6';
+                        helperText.textContent = 'Click card or press [Space] to flip';
+                        wrapper.appendChild(helperText);
+                    }
+                    
+                } else {
+                    // Session complete
+                    const completeMessage = document.createElement('div');
+                    completeMessage.className = 'text-center bg-white p-10 rounded-lg shadow-lg';
+                    completeMessage.innerHTML = `
+                        <h3 class="text-3xl font-bold text-green-600 mb-4">Session Complete!</h3>
+                        <p class="text-xl text-gray-700 mb-6">You reviewed all ${session.totalInSession} cards.</p>
+                    `;
+                    
+                    const buttonContainer = document.createElement('div');
+                    buttonContainer.className = 'flex flex-col sm:flex-row gap-4 justify-center';
+                    
+                    const backButton = this.createButton('Back to Decks', () => this.navigateTo('deckList'), 'bg-blue-600 text-white');
+                    const studyAgainButton = this.createButton('Study Again (Cram)', () => this.startCramSession(this.state.currentDeckId), 'bg-green-600 text-white');
+                    
+                    buttonContainer.appendChild(backButton);
+                    buttonContainer.appendChild(studyAgainButton);
+                    
+                    completeMessage.appendChild(buttonContainer);
+                    wrapper.appendChild(completeMessage);
+                }
+                
+                return wrapper;
+            },
+
+            /**
+             * Renders the modal container and its content
+             */
+            renderModal() {
+                let container = document.getElementById('modal-container');
+                if (!container) {
+                    container = document.createElement('div');
+                    container.id = 'modal-container';
+                    document.body.appendChild(container);
+                }
+                
+                container.innerHTML = ''; // Clear previous modal
+                
+                if (!this.state.modal) {
+                    return; // No modal to render
+                }
+                
+                const overlay = document.createElement('div');
+                overlay.className = 'modal-overlay';
+                // Close on overlay click
+                overlay.onclick = (e) => {
+                    if (e.target === overlay) this.closeModal();
+                };
+                
+                const content = document.createElement('div');
+                content.className = 'modal-content';
+                content.onclick = (e) => e.stopPropagation(); // Prevent closing on content click
+                
+                let title = '';
+                let body = document.createElement('div');
+                const deck = this.state.decks.find(d => d.id === this.state.currentDeckId);
+
+                switch (this.state.modal) {
+                    case 'createDeck':
+                        title = 'Create New Deck';
+                        body.appendChild(this.renderForm([
+                            { id: 'deckName', label: 'Deck Name', type: 'text' }
+                        ], 'Create', (formData) => {
+                            if (formData.deckName.trim()) {
+                                this.createDeck(formData.deckName.trim());
+                                this.closeModal();
+                            }
+                        }));
+                        break;
+                        
+                    case 'addCards':
+                        title = `Add Cards to "${deck.name}"`;
+                        body.appendChild(this.renderForm([
+                            { id: 'cardFront', label: 'Front', type: 'textarea' },
+                            { id: 'cardBack', label: 'Back', type: 'textarea' }
+                        ], 'Add Card', (formData) => {
+                            if (formData.cardFront.trim() && formData.cardBack.trim()) {
+                                this.addCard(deck.id, formData.cardFront.trim(), formData.cardBack.trim());
+                                // Clear form for next card
+                                document.getElementById('cardFront').value = '';
+                                document.getElementById('cardBack').value = '';
+                                document.getElementById('cardFront').focus();
+                            }
+                        }));
+                        // Add bulk import button
+                        const importButton = this.createButton('Bulk Import from CSV...', () => this.openModal('csvImport', deck.id), 'bg-gray-200 text-gray-800 w-full mt-4');
+                        body.appendChild(importButton);
+                        break;
+                        
+                    case 'csvImport':
+                        title = `Bulk Import to "${deck.name}"`;
+                        body.appendChild(this.renderForm([
+                            { id: 'csvData', label: 'CSV Data (front,back)', type: 'textarea', rows: 10, placeholder: 'Question 1,Answer 1\nQuestion 2,Answer 2' }
+                        ], 'Import Cards', (formData) => {
+                            if (formData.csvData.trim()) {
+                                this.handleCSVImport(deck.id, formData.csvData.trim());
+                                this.closeModal();
+                            }
+                        }));
+                        const helpText = document.createElement('p');
+                        helpText.className = 'text-sm text-gray-500 mt-2';
+                        helpText.textContent = 'Each line should be in "front,back" format. If the back contains a comma, it will be included.';
+                        body.appendChild(helpText);
+                        break;
+
+                    case 'manageDeck':
+                        title = `Manage "${deck.name}"`;
+                        const exportJSONBtn = this.createButton('Export Deck (JSON)', () => this.handleJSONExport(deck.id), 'bg-blue-600 text-white w-full mb-3');
+                        const importJSONBtn = this.createButton('Import Cards (JSON)', () => document.getElementById('json-import-input').click(), 'bg-blue-600 text-white w-full mb-3');
+                        const hiddenInput = document.createElement('input');
+                        hiddenInput.type = 'file';
+                        hiddenInput.id = 'json-import-input';
+                        hiddenInput.accept = '.json,application/json';
+                        hiddenInput.className = 'hidden';
+                        hiddenInput.onchange = (e) => {
+                            this.handleJSONImport(deck.id, e);
+                            this.closeModal();
+                        };
+                        const deleteBtn = this.createButton('Delete Deck', () => this.openModal('confirmDelete', deck.id), 'bg-red-600 text-white w-full');
+                        
+                        body.appendChild(exportJSONBtn);
+                        body.appendChild(importJSONBtn);
+                        body.appendChild(hiddenInput);
+                        body.appendChild(deleteBtn);
+                        break;
+                        
+                    case 'confirmDelete':
+                        const confirmDeck = this.state.decks.find(d => d.id === this.state.pendingDeleteDeckId);
+                        title = 'Delete Deck?';
+                        const warning = document.createElement('p');
+                        warning.className = 'mb-6';
+                        warning.innerHTML = `Are you sure you want to delete the deck "<strong>${confirmDeck.name}</strong>"? This action cannot be undone.`;
+                        body.appendChild(warning);
+                        
+                        const buttons = document.createElement('div');
+                        buttons.className = 'flex justify-end gap-4';
+                        const cancelBtn = this.createButton('Cancel', () => this.closeModal(), 'bg-gray-200 text-gray-800');
+                        const confirmBtn = this.createButton('Delete', () => {
+                            this.deleteDeck(this.state.pendingDeleteDeckId);
+                            this.closeModal();
+                        }, 'bg-red-600 text-white');
+                        buttons.appendChild(cancelBtn);
+                        buttons.appendChild(confirmBtn);
+                        body.appendChild(buttons);
+                        break;
+                }
+                
+                const titleEl = document.createElement('h2');
+                titleEl.className = 'text-2xl font-semibold mb-4';
+                titleEl.textContent = title;
+                
+                const closeButton = document.createElement('button');
+                closeButton.className = 'absolute top-4 right-4 text-gray-400 hover:text-gray-600 text-2xl';
+                closeButton.innerHTML = '&times;';
+                closeButton.onclick = () => this.closeModal();
+                
+                content.appendChild(closeButton);
+                content.appendChild(titleEl);
+                content.appendChild(body);
+                overlay.appendChild(content);
+                container.appendChild(overlay);
+
+                // Force browser to transition
+                setTimeout(() => {
+                    overlay.classList.add('is-visible');
+                }, 10);
+            },
+            
+            /**
+             * Helper to create a button
+             */
+            createButton(text, onClick, classes) {
+                const button = document.createElement('button');
+                button.textContent = text;
+                button.className = `font-semibold py-2 px-4 rounded-lg transition-all duration-200 ease-in-out disabled:opacity-50 ${classes}`;
+                button.onclick = onClick;
+                return button;
+            },
+            
+            /**
+             * Helper to render a generic form
+             */
+            renderForm(fields, submitText, onSubmit) {
+                const form = document.createElement('form');
+                form.className = 'space-y-4';
+                
+                fields.forEach(field => {
+                    const label = document.createElement('label');
+                    label.className = 'block text-sm font-medium text-gray-700';
+                    label.textContent = field.label;
+                    
+                    let input;
+                    if (field.type === 'textarea') {
+                        input = document.createElement('textarea');
+                        input.rows = field.rows || 3;
+                        if (field.placeholder) input.placeholder = field.placeholder;
+                    } else {
+                        input = document.createElement('input');
+                        input.type = field.type;
+                    }
+                    input.id = field.id;
+                    input.name = field.id;
+                    input.className = 'mt-1 block w-full border border-gray-300 rounded-lg shadow-sm p-2 focus:ring-blue-500 focus:border-blue-500';
+                    label.appendChild(input);
+                    form.appendChild(label);
+                });
+                
+                const submitButton = this.createButton(submitText, null, 'bg-blue-600 text-white w-full');
+                submitButton.type = 'submit';
+                form.appendChild(submitButton);
+                
+                form.onsubmit = (e) => {
+                    e.preventDefault();
+                    const formData = new FormData(form);
+                    const data = {};
+                    for (let [key, value] of formData.entries()) {
+                        data[key] = value;
+                    }
+                    onSubmit(data);
+                };
+                
+                return form;
+            },
+
+            // --- DECK & CARD ACTIONS ---
+
+            createDeck(name) {
+                const newDeck = {
+                    id: this.uuid(),
+                    name: name,
+                    cards: []
+                };
+                this.state.decks.push(newDeck);
+                this.saveData();
+                this.render();
+            },
+
+            deleteDeck(deckId) {
+                this.state.decks = this.state.decks.filter(deck => deck.id !== deckId);
+                this.saveData();
+                this.render();
+            },
+            
+            addCard(deckId, front, back) {
+                const deck = this.state.decks.find(d => d.id === deckId);
+                if (deck) {
+                    const newCard = {
+                        id: this.uuid(),
+                        front: front,
+                        back: back,
+                        repetitions: 0,
+                        easinessFactor: 2.5,
+                        interval: 0,
+                        dueDate: null // Will be set on first review
+                    };
+                    deck.cards.push(newCard);
+                    this.saveData();
+                    // Re-render the app to update stats in the background
+                    this.render();
+                }
+            },
+            
+            handleCSVImport(deckId, csvData) {
+                const deck = this.state.decks.find(d => d.id === deckId);
+                if (!deck) return;
+                
+                const lines = csvData.split('\n').filter(line => line.trim() !== '');
+                let importedCount = 0;
+                
+                lines.forEach(line => {
+                    try {
+                        const parts = line.split(',');
+                        const front = parts[0].trim().replace(/^"|"$/g, ''); // Remove surrounding quotes
+                        const back = parts.slice(1).join(',').trim().replace(/^"|"$/g, '');
+                        
+                        if (front && back) {
+                            this.addCard(deckId, front, back);
+                            importedCount++;
+                        }
+                    } catch (e) {
+                        console.warn("Skipping malformed CSV line:", line);
+                    }
+                });
+                
+                this.saveData();
+                this.render(); // Re-render deck list to show new stats
+                // TODO: Show a success message
+            },
+            
+            handleJSONExport(deckId) {
+                const deck = this.state.decks.find(d => d.id === deckId);
+                if (!deck) return;
+                
+                const dataStr = JSON.stringify(deck, null, 2);
+                const dataUri = 'data:application/json;charset=utf-8,' + encodeURIComponent(dataStr);
+                
+                const exportFileDefaultName = `${deck.name.replace(/[^a-z0-9]/gi, '_')}.json`;
+                
+                const linkElement = document.createElement('a');
+                linkElement.setAttribute('href', dataUri);
+                linkElement.setAttribute('download', exportFileDefaultName);
+                linkElement.click();
+            },
+            
+            handleJSONImport(deckId, event) {
+                const deck = this.state.decks.find(d => d.id === deckId);
+                if (!deck) return;
+                
+                const file = event.target.files[0];
+                if (!file) return;
+
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    try {
+                        const importedData = JSON.parse(e.target.result);
+                        let cardsToImport = [];
+
+                        // Check if it's a full deck export or just an array of cards
+                        if (Array.isArray(importedData.cards)) {
+                            cardsToImport = importedData.cards;
+                        } else if (Array.isArray(importedData)) {
+                            cardsToImport = importedData;
+                        } else {
+                            throw new Error("Invalid JSON format. Expected a deck object or an array of cards.");
+                        }
+
+                        let importedCount = 0;
+                        cardsToImport.forEach(card => {
+                            if (card.front && card.back) {
+                                // Ensure card has all properties, using defaults if missing
+                                const newCard = {
+                                    id: this.uuid(), // Always give a new ID
+                                    front: card.front,
+                                    back: card.back,
+                                    repetitions: card.repetitions || 0,
+                                    easinessFactor: card.easinessFactor || 2.5,
+                                    interval: card.interval || 0,
+                                    dueDate: card.dueDate || null
+                                };
+                                deck.cards.push(newCard);
+                                importedCount++;
+                            }
+                        });
+
+                        this.saveData();
+                        this.render();
+                        // TODO: Show success message: `Imported ${importedCount} cards.`
+                    } catch (error) {
+                        console.error("Failed to import JSON:", error);
+                        // TODO: Show error message to user
+                    }
+                };
+                reader.readAsText(file);
+            },
+            
+            /**
+             * Calculates stats for a given deck
+             */
+            getDeckStats(deck) {
+                const today = this.getTodayString();
+                let dueToday = 0;
+                let newCards = 0;
+                let mature = 0;
+                
+                deck.cards.forEach(card => {
+                    if (card.dueDate && card.dueDate <= today) {
+                        dueToday++;
+                    }
+                    if (card.repetitions === 0) {
+                        newCards++;
+                    }
+                    if (card.interval > 21) {
+                        mature++;
+                    }
+                });
+                
+                return { dueToday, newCards, mature };
+            },
+            
+            // --- STUDY SESSION ---
+            
+            getInitialStudySessionState() {
+                return {
+                    queue: [],
+                    currentCard: null,
+                    isFlipped: false,
+                    totalInSession: 0,
+                    completedCount: 0
+                };
+            },
+            
+            startStudySession(deckId) {
+                const deck = this.state.decks.find(d => d.id === deckId);
+                if (!deck) return;
+                
+                const today = this.getTodayString();
+                const dueCards = deck.cards.filter(c => c.dueDate && c.dueDate <= today);
+                
+                // Prioritize due cards
+                let newCardsToStudy = [];
+                const maxNewCards = 20; // Max new cards per session
+                const newCardsNeeded = Math.max(0, maxNewCards - dueCards.length);
+                
+                if (newCardsNeeded > 0) {
+                    const allNewCards = deck.cards.filter(c => c.repetitions === 0);
+                    // Shuffle new cards to not always get the first ones
+                    this.shuffleArray(allNewCards);
+                    newCardsToStudy = allNewCards.slice(0, newCardsNeeded);
+                }
+                
+                const studyQueue = [...dueCards, ...newCardsToStudy];
+                this.shuffleArray(studyQueue);
+                
+                this.state.studySession = {
+                    queue: studyQueue,
+                    currentCard: null,
+                    isFlipped: false,
+                    totalInSession: studyQueue.length,
+                    completedCount: 0
+                };
+                
+                this.showNextCard();
+            },
+            
+            /**
+             * Starts a "cram" session with all cards in the deck
+             */
+            startCramSession(deckId) {
+                const deck = this.state.decks.find(d => d.id === deckId);
+                if (!deck) return;
+                
+                // Get ALL cards from the deck
+                const studyQueue = [...deck.cards];
+                if (studyQueue.length === 0) {
+                    // No cards to study, just go back
+                    this.navigateTo('deckList');
+                    return;
+                }
+                
+                this.shuffleArray(studyQueue);
+                
+                this.state.studySession = {
+                    queue: studyQueue,
+                    currentCard: null,
+                    isFlipped: false,
+                    totalInSession: studyQueue.length,
+                    completedCount: 0 // Reset completed count
+                };
+                
+                this.showNextCard(); // This will render the new session
+            },
+            
+            showNextCard() {
+                if (this.state.studySession.queue.length > 0) {
+                    this.state.studySession.currentCard = this.state.studySession.queue.shift();
+                    this.state.studySession.isFlipped = false;
+                } else {
+                    this.state.studySession.currentCard = null;
+                }
+                this.render();
+            },
+            
+            flipCard() {
+                if (this.state.studySession.currentCard && !this.state.studySession.isFlipped) {
+                    this.state.studySession.isFlipped = true;
+                    this.render();
+                }
+            },
+            
+            /**
+             * Processes card grading based on SM-2 logic
+             */
+            gradeCard(grade) { // grade is 1, 2, 3, or 4
+                if (!this.state.studySession.isFlipped) return;
+                
+                const card = this.state.studySession.currentCard;
+                // Find the original card in the deck to update it
+                const deck = this.state.decks.find(d => d.id === this.state.currentDeckId);
+                const cardInDeck = deck.cards.find(c => c.id === card.id);
+                
+                if (!cardInDeck) return;
+
+                // Map 1-4 scale to SM-2's q (quality) 0-5
+                // 1 (Again) -> q=0
+                // 2 (Hard)  -> q=3 (difficult, but recalled)
+                // 3 (Good)  -> q=4
+                // 4 (Easy)  -> q=5
+                const q = [0, 0, 3, 4, 5][grade];
+                
+                if (q < 3) {
+                    // Grade 1: Forgot
+                    cardInDeck.repetitions = 0;
+                    cardInDeck.interval = 1; // Show again tomorrow
+                    // Re-add to the back of the queue for this session
+                    this.state.studySession.queue.push(card);
+                } else {
+                    // Grade 2, 3, or 4: Remembered
+                    
+                    // Update Easiness Factor
+                    let ef = cardInDeck.easinessFactor;
+                    let newEF = ef + (0.1 - (5 - q) * (0.08 + (5 - q) * 0.02));
+                    if (newEF < 1.3) newEF = 1.3;
+                    cardInDeck.easinessFactor = newEF;
+                    
+                    // Update repetitions
+                    cardInDeck.repetitions += 1;
+                    
+                    // Update interval
+                    let newInterval;
+                    if (cardInDeck.repetitions === 1) {
+                        newInterval = 1;
+                    } else if (cardInDeck.repetitions === 2) {
+                        newInterval = 6;
+                    } else {
+                        newInterval = Math.round(cardInDeck.interval * newEF);
+                    }
+                    cardInDeck.interval = newInterval;
+                    
+                    // Card was successfully recalled, increment completed count
+                    this.state.studySession.completedCount++;
+                }
+                
+                // Set new due date
+                const today = new Date();
+                const newDueDate = new Date(today.setDate(today.getDate() + cardInDeck.interval));
+                cardInDeck.dueDate = newDueDate.toISOString().split('T')[0];
+                
+                this.saveData();
+                this.showNextCard();
+            },
+            
+            /**
+             * Advances to the next card without grading
+             */
+            advanceCard() {
+                if (!this.state.studySession.isFlipped) return;
+                
+                // Increment completed count for progress bar
+                this.state.studySession.completedCount++;
+                
+                this.showNextCard();
+            },
+            
+            // --- EVENT HANDLERS ---
+            
+            handleKeydown(e) {
+                if (this.state.modal) {
+                    if (e.key === 'Escape') {
+                        this.closeModal();
+                    }
+                    return; // Don't process game keys if modal is open
+                }
+
+                if (this.state.currentView === 'study' && this.state.studySession.currentCard) {
+                    if (!this.state.studySession.isFlipped && e.code === 'Space') {
+                        e.preventDefault();
+                        this.flipCard();
+                    } else if (this.state.studySession.isFlipped && e.code === 'Space') {
+                        e.preventDefault();
+                        this.advanceCard();
+                    }
+                }
+            },
+            
+            // --- UTILITIES ---
+            
+            /**
+             * Shuffles an array in place
+             */
+            shuffleArray(array) {
+                for (let i = array.length - 1; i > 0; i--) {
+                    const j = Math.floor(Math.random() * (i + 1));
+                    [array[i], array[j]] = [array[j], array[i]];
+                }
+            }
+        };
+
+        // --- START APP ---
+        document.addEventListener('DOMContentLoaded', () => {
+            app.init();
+        });
+    </script>
+
+</body>
+</html>
+
+
+
+
