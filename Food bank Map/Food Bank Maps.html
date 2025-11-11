@@ -1,0 +1,2362 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_ef3496739b260829988675394e0bc2a8 {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+
+            <style>html, body {
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                padding: 0;
+            }
+            </style>
+
+            <style>#map {
+                position:absolute;
+                top:0;
+                bottom:0;
+                right:0;
+                left:0;
+                }
+            </style>
+
+            <script>
+                L_NO_TOUCH = false;
+                L_DISABLE_3D = false;
+            </script>
+
+        
+</head>
+<body>
+    
+    
+            <div class="folium-map" id="map_ef3496739b260829988675394e0bc2a8" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_ef3496739b260829988675394e0bc2a8 = L.map(
+                "map_ef3496739b260829988675394e0bc2a8",
+                {
+                    center: [39.887718618796995, -75.02744272105264],
+                    crs: L.CRS.EPSG3857,
+                    ...{
+  "zoom": 11,
+  "zoomControl": true,
+  "preferCanvas": false,
+}
+
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_775c6212c77080a19b8960634af4cc64 = L.tileLayer(
+                "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+                {
+  "minZoom": 0,
+  "maxZoom": 19,
+  "maxNativeZoom": 19,
+  "noWrap": false,
+  "attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors",
+  "subdomains": "abc",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_775c6212c77080a19b8960634af4cc64.addTo(map_ef3496739b260829988675394e0bc2a8);
+        
+    
+            var marker_627cf136c050054a08ce94d287d61676 = L.marker(
+                [39.9537509, -74.5509949],
+                {
+}
+            ).addTo(map_ef3496739b260829988675394e0bc2a8);
+        
+    
+            marker_627cf136c050054a08ce94d287d61676.bindTooltip(
+                `<div>
+                     <b>True Vine Memorial Church</b><br>101 Firehouse Road, Browns Mills, NJ, 08015, US<br>Time: 11:00am-3:00pm<br>Days: 4th Thursday
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_7d773746699bdaa55931b55984c19585 = L.marker(
+                [39.9619227, -74.5711909],
+                {
+}
+            ).addTo(map_ef3496739b260829988675394e0bc2a8);
+        
+    
+            marker_7d773746699bdaa55931b55984c19585.bindTooltip(
+                `<div>
+                     <b>Christian Caring Center</b><br>378 Lakehurst Road, Browns Mills, NJ, 08015, US<br>Time: 10:00am - 12:00pm<br>Days: Monday - Friday
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_df2382b0c6b9b1cb07cb233f5afa9a41 = L.marker(
+                [39.9619227, -74.5711909],
+                {
+}
+            ).addTo(map_ef3496739b260829988675394e0bc2a8);
+        
+    
+            marker_df2382b0c6b9b1cb07cb233f5afa9a41.bindTooltip(
+                `<div>
+                     <b>Christian Caring Center</b><br>378 Lakehurst Road, Browns Mills, NJ, 08015, US<br>Time: 10:00am - 3:00pm<br>Days: Monday - Friday
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_e439c5fc776c4acaff856192b7655b52 = L.marker(
+                [39.9708937, -74.6795121],
+                {
+}
+            ).addTo(map_ef3496739b260829988675394e0bc2a8);
+        
+    
+            marker_e439c5fc776c4acaff856192b7655b52.bindTooltip(
+                `<div>
+                     <b>Grace Episcopal Church</b><br>43 Elizabeth Street, Pemberton, NJ, 08068, US<br>Time: 10:00am-2:00pm<br>Days: 3rd Saturday
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_404f0e52b3b42b71d63311f1e17f3825 = L.marker(
+                [40.139966, -74.729549],
+                {
+}
+            ).addTo(map_ef3496739b260829988675394e0bc2a8);
+        
+    
+            marker_404f0e52b3b42b71d63311f1e17f3825.bindTooltip(
+                `<div>
+                     <b>Abundant New Life Ministries</b><br>223 Front Street, Fieldsboro, NJ, 08505, US<br>Time: 12:00pm - 3:00pm<br>Days: 3rd Thursday
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_e01792cc3ad1b65d12209073dd0b4845 = L.marker(
+                [39.9967584, -74.7848411],
+                {
+}
+            ).addTo(map_ef3496739b260829988675394e0bc2a8);
+        
+    
+            marker_e01792cc3ad1b65d12209073dd0b4845.bindTooltip(
+                `<div>
+                     <b>First Presbyterian Church</b><br>125 Garden Street, Mt. Holly, NJ, 08060, US<br>Time: 9:00am - 11:00am<br>Days: First Presbyterian Church; 3rd Wednesday
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_638796ecd030177a250d33bdd57d9a7e = L.marker(
+                [39.924118, -75.105069],
+                {
+}
+            ).addTo(map_ef3496739b260829988675394e0bc2a8);
+        
+    
+            marker_638796ecd030177a250d33bdd57d9a7e.bindTooltip(
+                `<div>
+                     <b>Koinonia Family Life, Inc.</b><br>1657 Mt. Ephraim Avenue, Camden, NJ, 08104, US<br>Time: Monday 8:00am - 2:00pm; 3rd Saturday 8:00am - 12:00pm<br>Days: Monday 8:00am - 2:00pm; 3rd Saturday 8:00am - 12:00pm
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_2a5994d6657fbfff88e22cfb9eda677f = L.marker(
+                [40.0556154, -74.799457],
+                {
+}
+            ).addTo(map_ef3496739b260829988675394e0bc2a8);
+        
+    
+            marker_2a5994d6657fbfff88e22cfb9eda677f.bindTooltip(
+                `<div>
+                     <b>Life Gate Assembly of God</b><br>1607 Jacksonville Road, Burlington, NJ, 08016, US<br>Time: 9:00am -11:00am<br>Days: 2nd and 4th Saturday
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_2129d634c03f12cfffd32782cebd2bb0 = L.marker(
+                [39.9957563, -74.7872639],
+                {
+}
+            ).addTo(map_ef3496739b260829988675394e0bc2a8);
+        
+    
+            marker_2129d634c03f12cfffd32782cebd2bb0.bindTooltip(
+                `<div>
+                     <b>Ebenezer Family Worship Center</b><br>35 Garden Street, Mt Holly, NJ, 08060, US<br>Time: 3rd Saturday 10:00 AM-2:00 PM<br>Days: 3rd Saturday 10:00 AM-2:00 PM
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_0f6a912d1bd483c827b35afea38355e6 = L.marker(
+                [39.9930583, -74.7874702],
+                {
+}
+            ).addTo(map_ef3496739b260829988675394e0bc2a8);
+        
+    
+            marker_0f6a912d1bd483c827b35afea38355e6.bindTooltip(
+                `<div>
+                     <b>Beacon of Hope</b><br>41 Mill Street, Mt. Holly, NJ, 08060, US<br>Time: Every Friday 9:00am - 12:30pm<br>Days: Every Friday 9:00am - 12:30pm
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_41b0027f9ba9ae4692b70fff080ef054 = L.marker(
+                [39.9989926, -74.7905131],
+                {
+}
+            ).addTo(map_ef3496739b260829988675394e0bc2a8);
+        
+    
+            marker_41b0027f9ba9ae4692b70fff080ef054.bindTooltip(
+                `<div>
+                     <b>SVDP - Sacred Heart Conference</b><br>260 High Street, Mt Holly, NJ, 08060, US<br>Time: Thursday 10:00 AM - 12:00 PM, 6:30 PM - 8:00 PM<br>Days: Thursday 10:00 AM - 12:00 PM, 6:30 PM - 8:00 PM
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_d88df3998879ec50cdcafe09d9f9aabd = L.marker(
+                [40.0089972, -74.7985471],
+                {
+}
+            ).addTo(map_ef3496739b260829988675394e0bc2a8);
+        
+    
+            marker_d88df3998879ec50cdcafe09d9f9aabd.bindTooltip(
+                `<div>
+                     <b>People First</b><br>1841 Burlington-Mt. Holly Road, Westampton, NJ, 08060, US<br>Time: 9:00am - 12:00pm<br>Days: People First; Monday and Friday
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_59402e6286abb09289489b5693a884ed = L.marker(
+                [39.983373, -74.795099],
+                {
+}
+            ).addTo(map_ef3496739b260829988675394e0bc2a8);
+        
+    
+            marker_59402e6286abb09289489b5693a884ed.bindTooltip(
+                `<div>
+                     <b>Legacy Treatment Services - Kairos House</b><br>201 Spout Spring Avenue, Mt Holly, NJ, 08060, US<br>Time: 10:00am-2:00pm<br>Days: Sunday-Saturday
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_c0efe46b3105bcb456e0221c446afefd = L.marker(
+                [39.9894869, -74.8000595],
+                {
+}
+            ).addTo(map_ef3496739b260829988675394e0bc2a8);
+        
+    
+            marker_c0efe46b3105bcb456e0221c446afefd.bindTooltip(
+                `<div>
+                     <b>Christian Community Church-Extended Hand</b><br>275 Holeman Street, Mt Holly, NJ, 08060, US<br>Time: 11:00am-2:00pm<br>Days: Monday and Wednesday
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_42034ba63b90404245b3647f5c18535f = L.marker(
+                [39.9894869, -74.8000595],
+                {
+}
+            ).addTo(map_ef3496739b260829988675394e0bc2a8);
+        
+    
+            marker_42034ba63b90404245b3647f5c18535f.bindTooltip(
+                `<div>
+                     <b>Christian Community Church-Extended Hand</b><br>275 Holeman Street, Mt Holly, NJ, 08060, US<br>Time: 1:00pm-2:00pm<br>Days: Tuesday, Thursday, Saturday, and Sunday
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_10bb86f42b8138eac7867bb5e7631179 = L.marker(
+                [40.0094131, -74.7884274],
+                {
+}
+            ).addTo(map_ef3496739b260829988675394e0bc2a8);
+        
+    
+            marker_10bb86f42b8138eac7867bb5e7631179.bindTooltip(
+                `<div>
+                     <b>Oaks Integrated Care - Mt. Holly</b><br>770 Woodlane Road, Mt. Holly, NJ, 08060, US<br>Time: Monday-Wednesday 10:00am-12:00pm; Thursday-Friday 1:00pm-; 3:00pm<br>Days: Monday-Friday; Monday-Wednesday 10:00am-12:00pm; Thursday-Friday 1:00pm-
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_328f3228a411546102b7ac28cca95822 = L.marker(
+                [40.1207613, -74.8100953],
+                {
+}
+            ).addTo(map_ef3496739b260829988675394e0bc2a8);
+        
+    
+            marker_328f3228a411546102b7ac28cca95822.bindTooltip(
+                `<div>
+                     <b>On the Wings of Love</b><br>348 West 4th Street, Florence, NJ, 08518, US<br>Time: 4:00pm - 6:00pm<br>Days: 348 West 4th Street; 3rd Thursday
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_71b3da06b9c77efa54c8a559249c133c = L.marker(
+                [39.8515376, -74.7528237],
+                {
+}
+            ).addTo(map_ef3496739b260829988675394e0bc2a8);
+        
+    
+            marker_71b3da06b9c77efa54c8a559249c133c.bindTooltip(
+                `<div>
+                     <b>SVDP - Holy Eucharist Conference</b><br>520 Medford Lakes Road, Tabernacle, NJ, 08088, US<br>Time: 10:00am-12:00pm<br>Days: Tuesday and Thursday
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_a9c137877de084ad28ff7cb66a969084 = L.marker(
+                [40.0456717, -74.8991442],
+                {
+}
+            ).addTo(map_ef3496739b260829988675394e0bc2a8);
+        
+    
+            marker_a9c137877de084ad28ff7cb66a969084.bindTooltip(
+                `<div>
+                     <b>Haitian Baptist Church</b><br>203 Sunset Road, Burlington, NJ, 08016, US<br>Time: 1:00pm - 5:00pm<br>Days: 3rd Wednesday
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_72b0ca2f2d5aedb513719b36b528515e = L.marker(
+                [40.0690197, -74.8514428],
+                {
+}
+            ).addTo(map_ef3496739b260829988675394e0bc2a8);
+        
+    
+            marker_72b0ca2f2d5aedb513719b36b528515e.bindTooltip(
+                `<div>
+                     <b>Tabernacle Baptist Church</b><br>150 East 2nd Street, Burlington, NJ, 08016, US<br>Time: 10:00am-12:00pm<br>Days: 150 East 2nd Street; Monday
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_2224df9aa6b989fd2b2449ef420a4ab6 = L.marker(
+                [40.0784161, -74.8533347],
+                {
+}
+            ).addTo(map_ef3496739b260829988675394e0bc2a8);
+        
+    
+            marker_2224df9aa6b989fd2b2449ef420a4ab6.bindTooltip(
+                `<div>
+                     <b>Bible Way Apostolic Missions</b><br>309 East Broad Street, Burlington, NJ, 08016, US<br>Time: 1st & 3rd Saturday 1:00PM-3:00PM<br>Days: 1st & 3rd Saturday 1:00PM-3:00PM
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_367a2818e9894d08dad02611be49d25a = L.marker(
+                [40.074194, -74.856695],
+                {
+}
+            ).addTo(map_ef3496739b260829988675394e0bc2a8);
+        
+    
+            marker_367a2818e9894d08dad02611be49d25a.bindTooltip(
+                `<div>
+                     <b>SVDP - St. Katherine Drexel</b><br>502 High Street, Burlington, NJ, 08016, US<br>Time: 9:30am-11:00am<br>Days: Wednesday
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_93b82c365d4f07e679ecd9bb7581023c = L.marker(
+                [40.0771119, -74.8618648],
+                {
+}
+            ).addTo(map_ef3496739b260829988675394e0bc2a8);
+        
+    
+            marker_93b82c365d4f07e679ecd9bb7581023c.bindTooltip(
+                `<div>
+                     <b>St. Mary's Episcopal Church - Ladle of Love</b><br>145 West Broad Street, Burlington, NJ, 08016, US<br>Time: Distribution Hours - 2nd, 3rd & 4th Wednesday 4:00pm-6:00pm<br>Days: Distribution Hours - 2nd, 3rd & 4th Wednesday 4:00pm-6:00pm
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_1b26a805c7711c6d04da04a040d38386 = L.marker(
+                [40.0769713, -74.8642007],
+                {
+}
+            ).addTo(map_ef3496739b260829988675394e0bc2a8);
+        
+    
+            marker_1b26a805c7711c6d04da04a040d38386.bindTooltip(
+                `<div>
+                     <b>Burlington SDA Church</b><br>256 Conover Street, Burlington, NJ, 08016, US<br>Time: 9:00am - 2:00pm<br>Days: 3rd Tuesday
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_be511e300c7e06fd0a2626e1b4459716 = L.marker(
+                [40.0760608, -74.8677875],
+                {
+}
+            ).addTo(map_ef3496739b260829988675394e0bc2a8);
+        
+    
+            marker_be511e300c7e06fd0a2626e1b4459716.bindTooltip(
+                `<div>
+                     <b>Catholic Charities - Emergency Service</b><br>450 Veterans Drive, Burlington, NJ, 08016, US<br>Time: 9:00am - 11:30am; 1:30pm - 3:30pm<br>Days: 1st and 2nd Wednesday
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_87547d27f15f0c9e78e0fcb6406d0f0e = L.marker(
+                [40.004873, -74.869551],
+                {
+}
+            ).addTo(map_ef3496739b260829988675394e0bc2a8);
+        
+    
+            marker_87547d27f15f0c9e78e0fcb6406d0f0e.bindTooltip(
+                `<div>
+                     <b>Humanity First USA</b><br>500 Bridge Street, Willingboro, NJ, 08046, US<br>Time: 11:00am - 2:00pm<br>Days: Humanity First USA; 3rd Saturday
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_a8293a8b7f6b20675bf18bb46db51d53 = L.marker(
+                [39.901607, -74.833044],
+                {
+}
+            ).addTo(map_ef3496739b260829988675394e0bc2a8);
+        
+    
+            marker_a8293a8b7f6b20675bf18bb46db51d53.bindTooltip(
+                `<div>
+                     <b>SVDP - St. Mary of the Lakes</b><br>1 Jones Road, Medford, NJ, 08055, US<br>Time: 9:00am-11:30am<br>Days: Wednesday and Saturday
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_f9d831da79d2244c89b9453aebab29ed = L.marker(
+                [40.0479543, -74.8889671],
+                {
+}
+            ).addTo(map_ef3496739b260829988675394e0bc2a8);
+        
+    
+            marker_f9d831da79d2244c89b9453aebab29ed.bindTooltip(
+                `<div>
+                     <b>Commissioned 2 Serve International Church</b><br>200 Sunset Road, Willingboro, NJ, 08046, US<br>Time: Tuesday 11:00am - 3:00pm<br>Days: Tuesday 11:00am - 3:00pm
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_99d81f269ddac854438d237e73b392e5 = L.marker(
+                [40.017303, -74.889728],
+                {
+}
+            ).addTo(map_ef3496739b260829988675394e0bc2a8);
+        
+    
+            marker_99d81f269ddac854438d237e73b392e5.bindTooltip(
+                `<div>
+                     <b>Delaware Valley Baptist Church</b><br>493 Beverly Rancocas Road, Willingboro, NJ, 08046, US<br>Time: 9:00am - 1:00pm<br>Days: 3rd Tuesday
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_1b42d11ad526286471e726c1a84ca746 = L.marker(
+                [40.031996, -74.9127251],
+                {
+}
+            ).addTo(map_ef3496739b260829988675394e0bc2a8);
+        
+    
+            marker_1b42d11ad526286471e726c1a84ca746.bindTooltip(
+                `<div>
+                     <b>Cathedral of Love</b><br>139 Beverly Rancocas Road, Willingboro, NJ, 08046, US<br>Time: 6:00pm-8:00pm<br>Days: 2nd & 4th Monday
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_16407d8f4a4a40bb74e8a41373301f14 = L.marker(
+                [39.9299201, -74.8860981],
+                {
+}
+            ).addTo(map_ef3496739b260829988675394e0bc2a8);
+        
+    
+            marker_16407d8f4a4a40bb74e8a41373301f14.bindTooltip(
+                `<div>
+                     <b>Jacob's Chapel AME Church</b><br>316 Elbo Lane, Mt. Laurel, NJ, 08054, US<br>Time: Wednesday 3:00pm - 5:00pm<br>Days: Wednesday 3:00pm - 5:00pm
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_b8c2cc6e2554c723b78760fd7c1881f2 = L.marker(
+                [39.8877768, -74.9112011],
+                {
+}
+            ).addTo(map_ef3496739b260829988675394e0bc2a8);
+        
+    
+            marker_b8c2cc6e2554c723b78760fd7c1881f2.bindTooltip(
+                `<div>
+                     <b>Wiley Church Food Pantry</b><br>99 East Main Street, Marlton, NJ, 08009, US<br>Time: 4:00pm-6:00pm<br>Days: Every other Monday
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_9fcbd09dc121a1fe16c9fb6aecb3ef68 = L.marker(
+                [39.7819563, -74.8942327],
+                {
+}
+            ).addTo(map_ef3496739b260829988675394e0bc2a8);
+        
+    
+            marker_9fcbd09dc121a1fe16c9fb6aecb3ef68.bindTooltip(
+                `<div>
+                     <b>City of Light Ministries, Inc.</b><br>615 Jackson Road, Atco, NJ, 08004, US<br>Time: 3rd Tuesday 10:00am - 3:00pm<br>Days: 3rd Tuesday 10:00am - 3:00pm
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_659a93046d58fff246f2f037d6099df3 = L.marker(
+                [39.8570273, -74.9490653],
+                {
+}
+            ).addTo(map_ef3496739b260829988675394e0bc2a8);
+        
+    
+            marker_659a93046d58fff246f2f037d6099df3.bindTooltip(
+                `<div>
+                     <b>Hope UM Church</b><br>500 Centennial Boulevard, Voorhees, NJ, 08043, US<br>Time: 12:15pm-2:15pm<br>Days: 2nd, 4th & 5th Wednesday
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_eb466fdb0625a18e4b067e355afcfac2 = L.marker(
+                [39.8641916, -74.9610923],
+                {
+}
+            ).addTo(map_ef3496739b260829988675394e0bc2a8);
+        
+    
+            marker_eb466fdb0625a18e4b067e355afcfac2.bindTooltip(
+                `<div>
+                     <b>Cultivate Church</b><br>2303 Evesham Road, Voorhees, NJ, 08043, US<br>Time: 4:00pm-7:00pm<br>Days: 2nd and 4th Thursday
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_140baedc8da340db9f582d354bdac751 = L.marker(
+                [39.7951366, -74.9159921],
+                {
+}
+            ).addTo(map_ef3496739b260829988675394e0bc2a8);
+        
+    
+            marker_140baedc8da340db9f582d354bdac751.bindTooltip(
+                `<div>
+                     <b>Green Grove Baptist Church</b><br>240 Cushman Avenue, Berlin, NJ, 08091, US<br>Time: 1:00pm - 4:00pm<br>Days: 3rd Friday
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_1715c44404a9e55fc0fd9031a260a1cb = L.marker(
+                [40.0060406, -75.0211836],
+                {
+}
+            ).addTo(map_ef3496739b260829988675394e0bc2a8);
+        
+    
+            marker_1715c44404a9e55fc0fd9031a260a1cb.bindTooltip(
+                `<div>
+                     <b>Epworth UM Church-Bread of Life</b><br>501 Morgan Avenue, Palmyra, NJ, 08065, US<br>Time: 9:00am - 1:00pm<br>Days: 3rd Saturday
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_dd65b23367c758b91357de6bd0437b15 = L.marker(
+                [39.9181709, -75.0052595],
+                {
+}
+            ).addTo(map_ef3496739b260829988675394e0bc2a8);
+        
+    
+            marker_dd65b23367c758b91357de6bd0437b15.bindTooltip(
+                `<div>
+                     <b>Jewish Family & Children's Service of SNJ</b><br>6 East Miami Avenue, Cherry Hill, NJ, 08034, US<br>Time: Monday, Tuesday & Wednesday 8:30am - 4:00pm by appointment only<br>Days: Monday, Tuesday & Wednesday 8:30am - 4:00pm by appointment only
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_1bed65813b00d0deaea3723b492e753c = L.marker(
+                [39.7317481, -74.866486],
+                {
+}
+            ).addTo(map_ef3496739b260829988675394e0bc2a8);
+        
+    
+            marker_1bed65813b00d0deaea3723b492e753c.bindTooltip(
+                `<div>
+                     <b>First Baptist Church of Chesilhurst (Corner Cupboard)</b><br>57 White Horse Pike, Chesilhurst, NJ, 08089, US<br>Time: 1:00pm - 5:00pm<br>Days: First Baptist Church of Chesilhurst (Corner Cupboard); 3rd Wednesday
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_f57c8d8a6383529e324486d02eb4c543 = L.marker(
+                [39.93187, -75.011891],
+                {
+}
+            ).addTo(map_ef3496739b260829988675394e0bc2a8);
+        
+    
+            marker_f57c8d8a6383529e324486d02eb4c543.bindTooltip(
+                `<div>
+                     <b>Cherry Hill SDA Church</b><br>700 Cooper Landing Road, Cherry Hill, NJ, 08002, US<br>Time: 8:30am-12:30pm<br>Days: 2nd Wednesday
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_96e6012aeed8daad6d74e0add3afdf57 = L.marker(
+                [40.0013224, -75.0323519],
+                {
+}
+            ).addTo(map_ef3496739b260829988675394e0bc2a8);
+        
+    
+            marker_96e6012aeed8daad6d74e0add3afdf57.bindTooltip(
+                `<div>
+                     <b>Evergreen Baptist Church</b><br>611 W. 3rd Street, Palmyra, NJ, 08065, US<br>Time: 4th Tuesday 9:00 AM-1:00 PM<br>Days: 611 W. 3rd Street; 4th Tuesday 9:00 AM-1:00 PM
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_fad61d7b56c79bdc468237d684c114d9 = L.marker(
+                [39.9623959, -75.0248883],
+                {
+}
+            ).addTo(map_ef3496739b260829988675394e0bc2a8);
+        
+    
+            marker_fad61d7b56c79bdc468237d684c114d9.bindTooltip(
+                `<div>
+                     <b>Bethel-Hosanna AME Church - Food Is Important Hope Mobile</b><br>3465 Haddonfield Rd, Pennsauken, NJ, 08109, US<br>Time: 1st Wednesday 10:00am - 1:00pm<br>Days: 1st Wednesday 10:00am - 1:00pm
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_1fd799a89f79b5477aed5de86b687a09 = L.marker(
+                [39.802588, -74.946945],
+                {
+}
+            ).addTo(map_ef3496739b260829988675394e0bc2a8);
+        
+    
+            marker_1fd799a89f79b5477aed5de86b687a09.bindTooltip(
+                `<div>
+                     <b>SVDP - St. Simon Stock</b><br>157 West White Horse Pike, Berlin, NJ, 08009, US<br>Time: 11:00am-3:00pm<br>Days: 1st & 3rd Tuesday
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_5c539b3669d03db841b0f4d2d6fa51e9 = L.marker(
+                [39.8260086, -74.97429],
+                {
+}
+            ).addTo(map_ef3496739b260829988675394e0bc2a8);
+        
+    
+            marker_5c539b3669d03db841b0f4d2d6fa51e9.bindTooltip(
+                `<div>
+                     <b>Bethany Baptist Church</b><br>1115 Gibbsboro Road, Lindenwold, NJ, 08021, US<br>Time: 9:00am-1:00pm<br>Days: 2nd Friday
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_a3cf6fab7cc445f2b81641a359c487a3 = L.marker(
+                [39.971669, -75.0491421],
+                {
+}
+            ).addTo(map_ef3496739b260829988675394e0bc2a8);
+        
+    
+            marker_a3cf6fab7cc445f2b81641a359c487a3.bindTooltip(
+                `<div>
+                     <b>St. Matthew's UM Church</b><br>1665 Derousse Avenue, Delair, NJ, 08110, US<br>Time: 11:30am - 2:00pm<br>Days: 3rd Tuesday
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_49a17ecd985e8d23c838a6d96fbc9b17 = L.marker(
+                [39.7913848, -74.9402779],
+                {
+}
+            ).addTo(map_ef3496739b260829988675394e0bc2a8);
+        
+    
+            marker_49a17ecd985e8d23c838a6d96fbc9b17.bindTooltip(
+                `<div>
+                     <b>Oaks Integrated Care- Berlin</b><br>128 Berlin-Cross Keys Road, Berlin, NJ, 08009, US<br>Time: 12:00pm-2:00pm<br>Days: Monday-Wednesday and Friday
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_c9b0e3319ccf76089f43c2d3c9ca27f6 = L.marker(
+                [39.8512801, -75.0055324],
+                {
+}
+            ).addTo(map_ef3496739b260829988675394e0bc2a8);
+        
+    
+            marker_c9b0e3319ccf76089f43c2d3c9ca27f6.bindTooltip(
+                `<div>
+                     <b>Living Proof Recovery Center-Center for Family Services</b><br>108 Somerdale Road, Voorhees, NJ, 08043, US<br>Time: 12:00pm - 4:00pm<br>Days: Wednesday and Thursday
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_f04909421d18da028dc12b47eadd01ce = L.marker(
+                [39.9419689, -75.0575232],
+                {
+}
+            ).addTo(map_ef3496739b260829988675394e0bc2a8);
+        
+    
+            marker_f04909421d18da028dc12b47eadd01ce.bindTooltip(
+                `<div>
+                     <b>Gates of Praise Church of God</b><br>6345 Wisteria Avenue, Pennsauken, NJ, 08109, US<br>Time: 10:00am - 12:00pm<br>Days: 2nd Saturday
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_04ec56a43521ed012b24ceb0ee1a5dd7 = L.marker(
+                [39.951907, -75.05109],
+                {
+}
+            ).addTo(map_ef3496739b260829988675394e0bc2a8);
+        
+    
+            marker_04ec56a43521ed012b24ceb0ee1a5dd7.bindTooltip(
+                `<div>
+                     <b>The WOW Center NJ</b><br>44 W. Chestnut Ave, Merchantville, NJ, 08109, US<br>Time: Wednesdays 3:00pm to 7:00pm<br>Days: N/A
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_e5f931292db175131a27ccbc329b2e39 = L.marker(
+                [39.949924, -75.052621],
+                {
+}
+            ).addTo(map_ef3496739b260829988675394e0bc2a8);
+        
+    
+            marker_e5f931292db175131a27ccbc329b2e39.bindTooltip(
+                `<div>
+                     <b>Trinity UM Church</b><br>36 West Maple Avenue, Merchantville, NJ, 08109, US<br>Time: Distribution Hours 2nd Wednesday 10:00am-12:00pm; Sunday 12:00pm-; 12:30pm Regular Distribution Day Every Month 2nd Wednesday; 10:00am-12:00pm; Sunday 12:00pm-12:30pm<br>Days: Distribution Hours 2nd Wednesday 10:00am-12:00pm; Sunday 12:00pm-; 12:30pm Regular Distribution Day Every Month 2nd Wednesday; 10:00am-12:00pm; Sunday 12:00pm-12:30pm
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_3bbe84f2acf8e75a6864a7634e78b94d = L.marker(
+                [39.9315552, -75.0475837],
+                {
+}
+            ).addTo(map_ef3496739b260829988675394e0bc2a8);
+        
+    
+            marker_3bbe84f2acf8e75a6864a7634e78b94d.bindTooltip(
+                `<div>
+                     <b>Cherry Hill Food & Outreach Pantry</b><br>910 Beechwood Avenue, Cherry Hill, NJ, 08002, US<br>Time: Tuesday 6:00pm-7:30pm; Wednesday 5:00pm-6:30pm; Thursday; 11:00am-1:00pm<br>Days: Tuesday-Thursday; Tuesday 6:00pm-7:30pm; Wednesday 5:00pm-6:30pm; Thursday
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_ef36e87ad027462ada54edf4639f358b = L.marker(
+                [39.8056077, -74.989757],
+                {
+}
+            ).addTo(map_ef3496739b260829988675394e0bc2a8);
+        
+    
+            marker_ef36e87ad027462ada54edf4639f358b.bindTooltip(
+                `<div>
+                     <b>St. Mary's - Friends of Clementon</b><br>33 Berlin Road, Clementon, NJ, 08021, US<br>Time: 5:00 PM - 7:00 PM<br>Days: Wednesday
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_4257629d27cae4ee7737b1ee6286b9e1 = L.marker(
+                [39.8466503, -75.0142506],
+                {
+}
+            ).addTo(map_ef3496739b260829988675394e0bc2a8);
+        
+    
+            marker_4257629d27cae4ee7737b1ee6286b9e1.bindTooltip(
+                `<div>
+                     <b>The MVP Foundation</b><br>10 Kennedy Boulevard, Somerdale, NJ, 08083, US<br>Time: 10:30am-11:30am<br>Days: Tuesday
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_c553bb63cf08da2b8cdcb3a19013f4b7 = L.marker(
+                [39.8613403, -75.0245795],
+                {
+}
+            ).addTo(map_ef3496739b260829988675394e0bc2a8);
+        
+    
+            marker_c553bb63cf08da2b8cdcb3a19013f4b7.bindTooltip(
+                `<div>
+                     <b>Masjid Freehaven</b><br>280 Ashland Avenue, Lawnside, NJ, 08045, US<br>Time: 6:00pm - 7:30pm<br>Days: 2nd and 4th Wednesday
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_b77ad20d7c708e5ea7cd552d0ee9a848 = L.marker(
+                [39.825202, -74.987491],
+                {
+}
+            ).addTo(map_ef3496739b260829988675394e0bc2a8);
+        
+    
+            marker_b77ad20d7c708e5ea7cd552d0ee9a848.bindTooltip(
+                `<div>
+                     <b>Commitment to Community Church</b><br>2 South Berlin Rd, Lindenwold, NJ, 08021, US<br>Time: Every Friday 4:00pm - 6:00pm<br>Days: Every Friday 4:00pm - 6:00pm
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_fd54089294dfb832b15707e04af6531a = L.marker(
+                [39.9569584, -75.0651564],
+                {
+}
+            ).addTo(map_ef3496739b260829988675394e0bc2a8);
+        
+    
+            marker_fd54089294dfb832b15707e04af6531a.bindTooltip(
+                `<div>
+                     <b>Mary, Queen of All Saints</b><br>4824 Camden Avenue, Pennsauken, NJ, 08110, US<br>Time: 10:00am - 11:30am<br>Days: Saturday
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_0e81f37cec6c400f7271a125b40d4faf = L.marker(
+                [39.8515997, -75.0246185],
+                {
+}
+            ).addTo(map_ef3496739b260829988675394e0bc2a8);
+        
+    
+            marker_0e81f37cec6c400f7271a125b40d4faf.bindTooltip(
+                `<div>
+                     <b>Lion of Judah Church</b><br>9 Odlen Avenue, Somerdale, NJ, 08083, US<br>Time: 8:00am-12:00pm<br>Days: 3rd Saturday
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_12e5a9d2d48376d5636d65ec17fbf5e0 = L.marker(
+                [39.8482284, -75.0233526],
+                {
+}
+            ).addTo(map_ef3496739b260829988675394e0bc2a8);
+        
+    
+            marker_12e5a9d2d48376d5636d65ec17fbf5e0.bindTooltip(
+                `<div>
+                     <b>Park Avenue Community Church</b><br>431 North Hilltop Avenue, Somerdale, NJ, 08083, US<br>Time: 1:00pm-3:30pm<br>Days: Thursday
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_0477d110672c62179540d029c6a17a4f = L.marker(
+                [39.8647726, -75.0325637],
+                {
+}
+            ).addTo(map_ef3496739b260829988675394e0bc2a8);
+        
+    
+            marker_0477d110672c62179540d029c6a17a4f.bindTooltip(
+                `<div>
+                     <b>Grace Temple Baptist Church</b><br>15 East Charleston Avenue, Lawnside, NJ, 08045, US<br>Time: 12:00pm-4:00pm<br>Days: 2nd Sunday
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_a5b9e5d2c64fcbf3e18dc34824aa4f7e = L.marker(
+                [39.944805, -75.068173],
+                {
+}
+            ).addTo(map_ef3496739b260829988675394e0bc2a8);
+        
+    
+            marker_a5b9e5d2c64fcbf3e18dc34824aa4f7e.bindTooltip(
+                `<div>
+                     <b>Martin Luther Chapel</b><br>4100 Terrace Avenue, Pennsauken, NJ, 08109, US<br>Time: 9:00am-11:00am<br>Days: 2nd & 4th Wednesday
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_bfe6d9aa885ee0118c116d1dc6254357 = L.marker(
+                [39.9486412, -75.0719173],
+                {
+}
+            ).addTo(map_ef3496739b260829988675394e0bc2a8);
+        
+    
+            marker_bfe6d9aa885ee0118c116d1dc6254357.bindTooltip(
+                `<div>
+                     <b>Urban Promise Ministries</b><br>3700 Rudderow Street, Pennsauken, NJ, 08110, US<br>Time: 9:00am-11:00am<br>Days: Saturday
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_827e45551248a5151fe083cc37e84940 = L.marker(
+                [39.9371049, -75.0753748],
+                {
+}
+            ).addTo(map_ef3496739b260829988675394e0bc2a8);
+        
+    
+            marker_827e45551248a5151fe083cc37e84940.bindTooltip(
+                `<div>
+                     <b>The Redeemed Christian Church of God</b><br>4101 Marlton Pike, Pennsauken, NJ, 08109, US<br>Time: N/A<br>Days: N/A
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_187aba0c2d42fd1a437d4a22f3eb1714 = L.marker(
+                [39.7827302, -74.9907775],
+                {
+}
+            ).addTo(map_ef3496739b260829988675394e0bc2a8);
+        
+    
+            marker_187aba0c2d42fd1a437d4a22f3eb1714.bindTooltip(
+                `<div>
+                     <b>Hope Chapel</b><br>1006 Pine Street, Pine Hill, NJ, 08021, US<br>Time: 5:30pm - 7:30pm<br>Days: 2nd & 4th Friday
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_07f74f00aaddea159b6b93d11b4fb567 = L.marker(
+                [39.9581183, -75.0831757],
+                {
+}
+            ).addTo(map_ef3496739b260829988675394e0bc2a8);
+        
+    
+            marker_07f74f00aaddea159b6b93d11b4fb567.bindTooltip(
+                `<div>
+                     <b>Congregation of Yahweh, Inc.</b><br>803 North 33rd Street, Camden, NJ, 08105, US<br>Time: 6:00pm-8:00pm<br>Days: 2nd Wednesday
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_05d6ced091a5bdd9821afbd8ac6aee24 = L.marker(
+                [39.9479951, -75.0835286],
+                {
+}
+            ).addTo(map_ef3496739b260829988675394e0bc2a8);
+        
+    
+            marker_05d6ced091a5bdd9821afbd8ac6aee24.bindTooltip(
+                `<div>
+                     <b>Asbury United Methodist Church</b><br>2926 Westfield Ave, Camden, NJ, 08105, US<br>Time: First & Last Saturday 9:00 AM - 1:00 PM<br>Days: First & Last Saturday 9:00 AM - 1:00 PM
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_2075848cd1f55a637fe9190a8c028aed = L.marker(
+                [39.8797371, -75.0582265],
+                {
+}
+            ).addTo(map_ef3496739b260829988675394e0bc2a8);
+        
+    
+            marker_2075848cd1f55a637fe9190a8c028aed.bindTooltip(
+                `<div>
+                     <b>Fellowship United Methodist - Haddon Heights</b><br>704 Garden Street, Haddon Heights, NJ, 08035, US<br>Time: Friday & Saturday 9:00am - 12:00pm<br>Days: Friday & Saturday 9:00am - 12:00pm
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_9759547834873beeeeb3dfdae85df1b0 = L.marker(
+                [39.9629226, -75.0804668],
+                {
+}
+            ).addTo(map_ef3496739b260829988675394e0bc2a8);
+        
+    
+            marker_9759547834873beeeeb3dfdae85df1b0.bindTooltip(
+                `<div>
+                     <b>St. Andrew Church</b><br>3050 River Road, Camden, NJ, 08105, US<br>Time: 10:00am - 1:00pm<br>Days: 2nd and 4th Wednesday
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_9d94b2796e7d32746157c3a0a237d3ac = L.marker(
+                [39.9477428, -75.0874175],
+                {
+}
+            ).addTo(map_ef3496739b260829988675394e0bc2a8);
+        
+    
+            marker_9d94b2796e7d32746157c3a0a237d3ac.bindTooltip(
+                `<div>
+                     <b>Spanish Pentecostal Church</b><br>130 North 27th Street, Camden, NJ, 08105, US<br>Time: 10:00am - 2:00pm<br>Days: 3rd Saturday
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_4b722b39ac53a45e5836776c6867b6ec = L.marker(
+                [39.8616847, -75.0574849],
+                {
+}
+            ).addTo(map_ef3496739b260829988675394e0bc2a8);
+        
+    
+            marker_4b722b39ac53a45e5836776c6867b6ec.bindTooltip(
+                `<div>
+                     <b>Grace Bible Church</b><br>887 Clements Bridge Road, Barrington, NJ, 08007, US<br>Time: 6:30pm - 8:30pm<br>Days: 1st and 4th Tuesday
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_ec8978e370715abb2d75aecce469ff6d = L.marker(
+                [39.953959, -75.0941754],
+                {
+}
+            ).addTo(map_ef3496739b260829988675394e0bc2a8);
+        
+    
+            marker_ec8978e370715abb2d75aecce469ff6d.bindTooltip(
+                `<div>
+                     <b>SSJ Neighborhood Center</b><br>904 North 25th Street, Camden, NJ, 08105, US<br>Time: 12:00pm - 4:00pm<br>Days: 3rd Wednesday
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_bcafd82f246141b8915ce71fc5faa4b2 = L.marker(
+                [39.9435965, -75.0923641],
+                {
+}
+            ).addTo(map_ef3496739b260829988675394e0bc2a8);
+        
+    
+            marker_bcafd82f246141b8915ce71fc5faa4b2.bindTooltip(
+                `<div>
+                     <b>Love Ministries Outreach International, Inc. Pantry</b><br>114 Boyd Street, Camden, NJ, 08105, US<br>Time: Thursday & Saturday 10:00am - 12:00pm; 4th Monday 10:00am - 2:00pm<br>Days: Thursday & Saturday 10:00am - 12:00pm; 4th Monday 10:00am - 2:00pm
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_ce1a51e5ffe257856b9d29e1d7cbdbba = L.marker(
+                [39.9564808, -75.0947271],
+                {
+}
+            ).addTo(map_ef3496739b260829988675394e0bc2a8);
+        
+    
+            marker_ce1a51e5ffe257856b9d29e1d7cbdbba.bindTooltip(
+                `<div>
+                     <b>Evangelistic Mennonite Church</b><br>1035 North 27th Street, Camden, NJ, 08105, US<br>Time: 10:00am - 1:00pm<br>Days: Last Friday
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_c26bca97a3f0aa691cb566e69cf369f6 = L.marker(
+                [39.9434349, -75.0960808],
+                {
+}
+            ).addTo(map_ef3496739b260829988675394e0bc2a8);
+        
+    
+            marker_c26bca97a3f0aa691cb566e69cf369f6.bindTooltip(
+                `<div>
+                     <b>Love Ministries Outreach International, Inc. - Hope Mobile</b><br>1900 Carman Street, Camden, NJ, 08105, US<br>Time: Every Tuesday 10:00am - 12:00pm; 3rd Monday 10:00am - 2:00pm<br>Days: Every Tuesday 10:00am - 12:00pm; 3rd Monday 10:00am - 2:00pm
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_6ad05bde85959174e2390944c972a05e = L.marker(
+                [39.8932525, -75.0816786],
+                {
+}
+            ).addTo(map_ef3496739b260829988675394e0bc2a8);
+        
+    
+            marker_6ad05bde85959174e2390944c972a05e.bindTooltip(
+                `<div>
+                     <b>Bethel House of God</b><br>431 West Nicholson Road, Audubon, NJ, 08106, US<br>Time: 8:00am-12:00pm<br>Days: 3rd Saturday
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_d17f433bf9d620388ba356401c9f75b3 = L.marker(
+                [39.9244185, -75.0927973],
+                {
+}
+            ).addTo(map_ef3496739b260829988675394e0bc2a8);
+        
+    
+            marker_d17f433bf9d620388ba356401c9f75b3.bindTooltip(
+                `<div>
+                     <b>New Life Community Development Corp</b><br>1721 Haddon Avenue, Camden, NJ, 08103, US<br>Time: 3rd Friday 1:00pm - 2:30pm; 4th Wednesday 10:30am - 2:00pm<br>Days: 3rd Friday and 4th Wednesday; 3rd Friday 1:00pm - 2:30pm; 4th Wednesday 10:30am - 2:00pm
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_054804c511672a0ade4c6751b5d8c262 = L.marker(
+                [39.9521357, -75.1039065],
+                {
+}
+            ).addTo(map_ef3496739b260829988675394e0bc2a8);
+        
+    
+            marker_054804c511672a0ade4c6751b5d8c262.bindTooltip(
+                `<div>
+                     <b>KROC Center - The Salvation Army</b><br>1865 Harrison Avenue, Camden, NJ, 08105, US<br>Time: Monday 9:00am - 11:30am; 1:00pm - 3:45pm; Wednesday 8:30am - 11:30am; 1:00pm - 3:45pm; Friday 8:30am - 11:30am; 1:00pm - 2:45pm<br>Days: Monday 9:00am - 11:30am; 1:00pm - 3:45pm; Wednesday 8:30am - 11:30am; 1:00pm - 3:45pm; Friday 8:30am - 11:30am; 1:00pm - 2:45pm
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_b61c3d2b0222458cc07e31332a833352 = L.marker(
+                [39.9439606, -75.102269],
+                {
+}
+            ).addTo(map_ef3496739b260829988675394e0bc2a8);
+        
+    
+            marker_b61c3d2b0222458cc07e31332a833352.bindTooltip(
+                `<div>
+                     <b>Cathedral Kitchen</b><br>1514 Federal Street, Camden, NJ, 08105, US<br>Time: Monday - Saturday 3:00pm - 5:00pm<br>Days: Monday - Saturday 3:00pm - 5:00pm
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_7974f0e11ed72afe8bc6e1ce9e9973f3 = L.marker(
+                [39.9335728, -75.0834919],
+                {
+}
+            ).addTo(map_ef3496739b260829988675394e0bc2a8);
+        
+    
+            marker_7974f0e11ed72afe8bc6e1ce9e9973f3.bindTooltip(
+                `<div>
+                     <b>Parkside UM Church</b><br>1420 Kaighn Avenue, Camden, NJ, 08103, US<br>Time: 2nd and 4th Sunday 12:00pm-2:00pm<br>Days: 2nd and 4th Sunday 12:00pm-2:00pm
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_32ae46a0d37eccae6dc6969fba6618bc = L.marker(
+                [39.91735, -75.095693],
+                {
+}
+            ).addTo(map_ef3496739b260829988675394e0bc2a8);
+        
+    
+            marker_32ae46a0d37eccae6dc6969fba6618bc.bindTooltip(
+                `<div>
+                     <b>Word of Life Outreach Center Inc.</b><br>201 Cooper Ave, Woodlynne, NJ, 08107, US<br>Time: 2nd & 4th Saturday 9:00 AM-12:00 PM<br>Days: 2nd & 4th Saturday 9:00 AM-12:00 PM
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_e3c06cb86d2852c150aae01a5b58339f = L.marker(
+                [39.9335873, -75.1020633],
+                {
+}
+            ).addTo(map_ef3496739b260829988675394e0bc2a8);
+        
+    
+            marker_e3c06cb86d2852c150aae01a5b58339f.bindTooltip(
+                `<div>
+                     <b>Little Rock Baptist Church</b><br>1210 Kenwood Avenue, Camden, NJ, 08109, US<br>Time: 11:00am-3:00pm<br>Days: 4th Wednesday
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_c13249ddc7cd9d6fbbcf3f5262916d17 = L.marker(
+                [39.9271121, -75.1014755],
+                {
+}
+            ).addTo(map_ef3496739b260829988675394e0bc2a8);
+        
+    
+            marker_c13249ddc7cd9d6fbbcf3f5262916d17.bindTooltip(
+                `<div>
+                     <b>Safe Passage CTC</b><br>1300 Thurman Street, Camden, NJ, 08104, US<br>Time: Thursday 10:00am-12:00pm<br>Days: Thursday 10:00am-12:00pm
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_078f57db36bec1441e7b320075faaff6 = L.marker(
+                [39.926638, -75.101751],
+                {
+}
+            ).addTo(map_ef3496739b260829988675394e0bc2a8);
+        
+    
+            marker_078f57db36bec1441e7b320075faaff6.bindTooltip(
+                `<div>
+                     <b>Hope Community Outreach Services, Inc.</b><br>1299 Morton Street, Camden, NJ, 08104, US<br>Time: 11:00am - 2:00pm<br>Days: 1st & 2nd Friday and 3rd Tuesday
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_ba994feb8e76c49cec49aa02d5b24269 = L.marker(
+                [39.9304766, -75.1035888],
+                {
+}
+            ).addTo(map_ef3496739b260829988675394e0bc2a8);
+        
+    
+            marker_ba994feb8e76c49cec49aa02d5b24269.bindTooltip(
+                `<div>
+                     <b>Masjidun-Nur, Inc.</b><br>1234 Mechanic Street, Camden, NJ, 08104, US<br>Time: 11:00am - 3:00pm<br>Days: 3rd Saturday
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_17afdcd6150a1919c10abfd5aeed2673 = L.marker(
+                [39.9458215, -75.1091107],
+                {
+}
+            ).addTo(map_ef3496739b260829988675394e0bc2a8);
+        
+    
+            marker_17afdcd6150a1919c10abfd5aeed2673.bindTooltip(
+                `<div>
+                     <b>Mt. Calvary Baptist Church</b><br>1198 Penn Street, Camden, NJ, 08102, US<br>Time: 11:30am - 2:00pm<br>Days: Tuesday and Friday
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_cb577a404aa45028ced149d7caf6d859 = L.marker(
+                [39.9266799, -75.1063654],
+                {
+}
+            ).addTo(map_ef3496739b260829988675394e0bc2a8);
+        
+    
+            marker_cb577a404aa45028ced149d7caf6d859.bindTooltip(
+                `<div>
+                     <b>Kingdom Harvest International</b><br>1529 Mt. Ephraim Avenue, Camden, NJ, 08104, US<br>Time: 12:00pm - 2:00pm<br>Days: Sunday
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_545098975844e28bc981bb611190f39d = L.marker(
+                [39.9500855, -75.1138749],
+                {
+}
+            ).addTo(map_ef3496739b260829988675394e0bc2a8);
+        
+    
+            marker_545098975844e28bc981bb611190f39d.bindTooltip(
+                `<div>
+                     <b>Camden Bible Tabernacle</b><br>823 Elm St., Camden, NJ, 08102, US<br>Time: Distribution 2nd Thursday 10:00am - 2:00pm<br>Days: Distribution 2nd Thursday 10:00am - 2:00pm
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_e0c0de7c6f12de2a5db1ba4ea6e4b2fe = L.marker(
+                [39.8404635, -75.0694847],
+                {
+}
+            ).addTo(map_ef3496739b260829988675394e0bc2a8);
+        
+    
+            marker_e0c0de7c6f12de2a5db1ba4ea6e4b2fe.bindTooltip(
+                `<div>
+                     <b>Chews United Methodist Church</b><br>319 Black Horse Pike, Glendora, NJ, 08029, US<br>Time: 9:30am-1:30pm<br>Days: 3rd Saturday
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_0396f8acdac8fc00d9095ba765064d42 = L.marker(
+                [39.9280551, -75.1120962],
+                {
+}
+            ).addTo(map_ef3496739b260829988675394e0bc2a8);
+        
+    
+            marker_0396f8acdac8fc00d9095ba765064d42.bindTooltip(
+                `<div>
+                     <b>Pentecostal Church of Celestial Fire</b><br>1476 South 8th Street, Camden, NJ, 08104, US<br>Time: 9:00am - 1:00pm<br>Days: 3rd Saturday
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_7d8d3f5f47738443cb14cfe906dca76e = L.marker(
+                [39.921955, -75.110439],
+                {
+}
+            ).addTo(map_ef3496739b260829988675394e0bc2a8);
+        
+    
+            marker_7d8d3f5f47738443cb14cfe906dca76e.bindTooltip(
+                `<div>
+                     <b>Better Tomorrows – Camden</b><br>1800 South 9th St, Camden , NJ, 08104, US<br>Time: 2nd Wednesday 10:00 AM-2:00 PM *4thTuesday in November ONLY -<br>Days: 2nd Wednesday 10:00 AM-2:00 PM *4thTuesday in November ONLY -
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_53001c00178174da2fa1f2964e22d190 = L.marker(
+                [39.93542, -75.115821],
+                {
+}
+            ).addTo(map_ef3496739b260829988675394e0bc2a8);
+        
+    
+            marker_53001c00178174da2fa1f2964e22d190.bindTooltip(
+                `<div>
+                     <b>New Wesley Community Development</b><br>701 Spruce Street, Camden, NJ, 08104, US<br>Time: Distribution Hours: 3rd Thursday 9:00am - 1:00pm Regular Distribution<br>Days: Distribution Hours: 3rd Thursday 9:00am - 1:00pm Regular Distribution; Day Every Month 3rd Thursday
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_49255b782cfb90de51af6200e3eea28e = L.marker(
+                [39.9353718, -75.1185779],
+                {
+}
+            ).addTo(map_ef3496739b260829988675394e0bc2a8);
+        
+    
+            marker_49255b782cfb90de51af6200e3eea28e.bindTooltip(
+                `<div>
+                     <b>Faith Tabernacle Church</b><br>553 Spruce St., Camden, NJ, 08103, US<br>Time: Sunday, Wednesday, Friday 9:00 AM-1:00 PM<br>Days: Sunday, Wednesday, Friday 9:00 AM-1:00 PM
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_506a5dc025c5e93246c51761d961ac0c = L.marker(
+                [39.945503, -75.1218475],
+                {
+}
+            ).addTo(map_ef3496739b260829988675394e0bc2a8);
+        
+    
+            marker_506a5dc025c5e93246c51761d961ac0c.bindTooltip(
+                `<div>
+                     <b>St. Paul's Episcopal Church</b><br>422 Market Street, Camden, NJ, 08102, US<br>Time: 7:30am - 11:30am<br>Days: 4th Sunday
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_4afaeec7a8fd8e05d087a5d25d4b8878 = L.marker(
+                [39.937965, -75.120333],
+                {
+}
+            ).addTo(map_ef3496739b260829988675394e0bc2a8);
+        
+    
+            marker_4afaeec7a8fd8e05d087a5d25d4b8878.bindTooltip(
+                `<div>
+                     <b>St. John's Church of Turnersville, Inc.</b><br>525 Royden Street, Camden, NJ, 08103, US<br>Time: 11:00am - 3:30pm<br>Days: Sunday
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_739b68ba9610c89efd9dffa67ca2ac5d = L.marker(
+                [39.9206629, -75.1137844],
+                {
+}
+            ).addTo(map_ef3496739b260829988675394e0bc2a8);
+        
+    
+            marker_739b68ba9610c89efd9dffa67ca2ac5d.bindTooltip(
+                `<div>
+                     <b>Antioch Baptist Church</b><br>700 Ferry Avenue, Camden, NJ, 08104, US<br>Time: 9:00am-1:00pm<br>Days: 3rd Tuesday
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_b01141a430d79942cd72c6ca4bba2b67 = L.marker(
+                [39.9325194, -75.1190951],
+                {
+}
+            ).addTo(map_ef3496739b260829988675394e0bc2a8);
+        
+    
+            marker_b01141a430d79942cd72c6ca4bba2b67.bindTooltip(
+                `<div>
+                     <b>Shalom Baptist Church</b><br>1036 Broadway, Camden, NJ, 08103, US<br>Time: 2:00pm - 6:00pm<br>Days: 2nd Thursday
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_34c968d198b40c672cad521dd5a91da8 = L.marker(
+                [39.9418631, -75.1229665],
+                {
+}
+            ).addTo(map_ef3496739b260829988675394e0bc2a8);
+        
+    
+            marker_34c968d198b40c672cad521dd5a91da8.bindTooltip(
+                `<div>
+                     <b>Fountain of Life Church, Inc.</b><br>403 Stevens Street, Camden, NJ, 08103, US<br>Time: 8:00am-12:00pm<br>Days: 3rd Wednesday
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_c03d821fac319caa6e57d5a113776228 = L.marker(
+                [39.9152642, -75.1185443],
+                {
+}
+            ).addTo(map_ef3496739b260829988675394e0bc2a8);
+        
+    
+            marker_c03d821fac319caa6e57d5a113776228.bindTooltip(
+                `<div>
+                     <b>Mighty Writers</b><br>1801 Broadway, Camden, NJ, 08104, US<br>Time: Monday-Thursday 11:30 AM-1:00 PM<br>Days: Monday-Thursday 11:30 AM-1:00 PM
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_28d31978f6220d1460cffbc2c6b2121b = L.marker(
+                [39.922928, -75.1207865],
+                {
+}
+            ).addTo(map_ef3496739b260829988675394e0bc2a8);
+        
+    
+            marker_28d31978f6220d1460cffbc2c6b2121b.bindTooltip(
+                `<div>
+                     <b>Church of the Sacred Heart</b><br>1739 Ferry Avenue, Camden, NJ, 08104, US<br>Time: 7:30am - 11:30am<br>Days: 4th Saturday
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_6880721cd0e4f05e71da22b2cf121c79 = L.marker(
+                [39.9335728, -75.0834919],
+                {
+}
+            ).addTo(map_ef3496739b260829988675394e0bc2a8);
+        
+    
+            marker_6880721cd0e4f05e71da22b2cf121c79.bindTooltip(
+                `<div>
+                     <b>Neighborhood Center, Inc.</b><br>278 Kaighn Avenue, Camden, NJ, 08103, US<br>Time: 12:00pm-1:00pm<br>Days: Monday-Friday
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_9365ce25ec2261189decc1463d77a135 = L.marker(
+                [39.6758672, -74.9534858],
+                {
+}
+            ).addTo(map_ef3496739b260829988675394e0bc2a8);
+        
+    
+            marker_9365ce25ec2261189decc1463d77a135.bindTooltip(
+                `<div>
+                     <b>Family of Faith</b><br>1735 Winslow Road, Williamstown, NJ, 08094, US<br>Time: Distribution 1st & 3rd Saturday 11:30 AM–1:30 PM; *Open Saturday, November 22, from 11:00 AM to 3:00 PM<br>Days: Distribution 1st & 3rd Saturday 11:30 AM–1:30 PM; *Open Saturday, November 22, from 11:00 AM to 3:00 PM
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_1cd1060004cbcf84159c1ef7a8a58b53 = L.marker(
+                [39.898048, -75.123566],
+                {
+}
+            ).addTo(map_ef3496739b260829988675394e0bc2a8);
+        
+    
+            marker_1cd1060004cbcf84159c1ef7a8a58b53.bindTooltip(
+                `<div>
+                     <b>Potters House Assembly of God</b><br>301 Monmouth Street, Gloucester City, NJ, 08030, US<br>Time: 9:00am-1:00pm<br>Days: 3rd Tuesday
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_27b4054b788092f1c067eec0ecc08fb2 = L.marker(
+                [39.8049115, -75.078321],
+                {
+}
+            ).addTo(map_ef3496739b260829988675394e0bc2a8);
+        
+    
+            marker_27b4054b788092f1c067eec0ecc08fb2.bindTooltip(
+                `<div>
+                     <b>Laurelwood SDA Church</b><br>3051 Good Intent Road, Deptford, NJ, 08096, US<br>Time: 12:00pm - 1:30pm<br>Days: 1st & 3rd Saturday
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_f0eae274b85d978150a87bdd20c07914 = L.marker(
+                [39.7764812, -75.0523919],
+                {
+}
+            ).addTo(map_ef3496739b260829988675394e0bc2a8);
+        
+    
+            marker_f0eae274b85d978150a87bdd20c07914.bindTooltip(
+                `<div>
+                     <b>Apostles Lutheran Church</b><br>4401 Black Horse Pike, Turnersville, NJ, 08012, US<br>Time: 1:00pm-3:00pm<br>Days: 2nd and 4th Thursday
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_55d9332534f80d1a3e9de7c733bed670 = L.marker(
+                [39.8676841, -75.1267223],
+                {
+}
+            ).addTo(map_ef3496739b260829988675394e0bc2a8);
+        
+    
+            marker_55d9332534f80d1a3e9de7c733bed670.bindTooltip(
+                `<div>
+                     <b>Macedonia Baptist Church</b><br>351 High Street, Westville, NJ, 08093, US<br>Time: 12:30pm - 2:30pm<br>Days: 3rd Sunday
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_1c3fa85eb20856514c433056471b037d = L.marker(
+                [39.6851307, -74.9929665],
+                {
+}
+            ).addTo(map_ef3496739b260829988675394e0bc2a8);
+        
+    
+            marker_1c3fa85eb20856514c433056471b037d.bindTooltip(
+                `<div>
+                     <b>Spring of Hope Ministry</b><br>31 Poplar Street, Williamstown, NJ, 08094, US<br>Time: 9:00am - 1:00pm<br>Days: 3rd Saturday
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_c2d0d9f4f3f81258ded533f7338abcde = L.marker(
+                [39.8723736, -75.1295078],
+                {
+}
+            ).addTo(map_ef3496739b260829988675394e0bc2a8);
+        
+    
+            marker_c2d0d9f4f3f81258ded533f7338abcde.bindTooltip(
+                `<div>
+                     <b>Straight Line Church</b><br>207 3rd Avenue, Westville, NJ, 08093, US<br>Time: 9:00am-1:00pm<br>Days: 207 3rd Avenue; 2nd Saturday
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_5bb27c92fe5492a294ae6388b1401fd9 = L.marker(
+                [39.682352, -74.9903231],
+                {
+}
+            ).addTo(map_ef3496739b260829988675394e0bc2a8);
+        
+    
+            marker_5bb27c92fe5492a294ae6388b1401fd9.bindTooltip(
+                `<div>
+                     <b>First Presbyterian Church of Williamstown</b><br>430 S. Main St, Williamstown, NJ, 08094, US<br>Time: 2nd Wednesday & 4th Saturday 10:00 AM - 12:00 PM<br>Days: First Presbyterian Church of Williamstown; 2nd Wednesday & 4th Saturday 10:00 AM - 12:00 PM
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_c329dedff3216f2c14e44744e716a907 = L.marker(
+                [39.8562042, -75.1250199],
+                {
+}
+            ).addTo(map_ef3496739b260829988675394e0bc2a8);
+        
+    
+            marker_c329dedff3216f2c14e44744e716a907.bindTooltip(
+                `<div>
+                     <b>The Victory Group</b><br>1035 Delsea Drive, Westville, NJ, 08093, US<br>Time: Regular Distribution Day Every Month 3rd Saturday 9:00am - 1:00pm; -<br>Days: Regular Distribution Day Every Month 3rd Saturday 9:00am - 1:00pm; -
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_fe55e3bea5287169b17b8aeac88cf350 = L.marker(
+                [39.6867567, -74.9994369],
+                {
+}
+            ).addTo(map_ef3496739b260829988675394e0bc2a8);
+        
+    
+            marker_fe55e3bea5287169b17b8aeac88cf350.bindTooltip(
+                `<div>
+                     <b>St. Matthew's Community Development Center</b><br>245 Glassboro Road, Williamstown, NJ, 08094, US<br>Time: 9:00am - 1:00pm<br>Days: 4th Thursday
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_2758ce8adeca69ee895f6566282d5aee = L.marker(
+                [39.6810559, -74.9966921],
+                {
+}
+            ).addTo(map_ef3496739b260829988675394e0bc2a8);
+        
+    
+            marker_2758ce8adeca69ee895f6566282d5aee.bindTooltip(
+                `<div>
+                     <b>Williamstown Sunrise Rotary / Monroe Twp Pantry</b><br>408 Church Street, Williamstown, NJ, 08094, US<br>Time: 10:00am-4:00pm @ 301 Blue Bell Rd, Williamstown, NJ; 9:30am-11:30am @ 408 Church Street, Williamstown, NJ<br>Days: N/A
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_bd90afcdef3b73aafa9f34ff1cf3b5e9 = L.marker(
+                [39.739716, -75.0685323],
+                {
+}
+            ).addTo(map_ef3496739b260829988675394e0bc2a8);
+        
+    
+            marker_bd90afcdef3b73aafa9f34ff1cf3b5e9.bindTooltip(
+                `<div>
+                     <b>Rotary Club of Wash. -Mother's Cupboard</b><br>523 Egg Harbor Rd, Sewell, NJ, 08080, US<br>Time: 9:00am - 12:00pm<br>Days: Distribution Every Thursday (except 5th Thursday of each month when
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_0cc4ef1f0a94511f9dfda8f9c072ee41 = L.marker(
+                [39.8494823, -75.1419258],
+                {
+}
+            ).addTo(map_ef3496739b260829988675394e0bc2a8);
+        
+    
+            marker_0cc4ef1f0a94511f9dfda8f9c072ee41.bindTooltip(
+                `<div>
+                     <b>North Baptist Church</b><br>1020 North Evergreen Avenue, Woodbury, NJ, 08096, US<br>Time: 1:00pm - 3:00pm<br>Days: 3rd, 4th, and 5th Monday - Saturday
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_29d451a472067b46c72c28eda979289e = L.marker(
+                [39.767533, -75.1054996],
+                {
+}
+            ).addTo(map_ef3496739b260829988675394e0bc2a8);
+        
+    
+            marker_29d451a472067b46c72c28eda979289e.bindTooltip(
+                `<div>
+                     <b>Loving Our Cities</b><br>274 Delsea Drive, Sewell, NJ, 08080, US<br>Time: Tuesday 9:00am - 12:00pm; Thursday 4:00pm - 6:00pm **CLOSED NOV. 27th FOR<br>Days: Every Tuesday and Thursday; Tuesday 9:00am - 12:00pm; Thursday 4:00pm - 6:00pm **CLOSED NOV. 27th FOR
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_061f60569ae42f369e6c86e6e703a096 = L.marker(
+                [39.8385501, -75.1529857],
+                {
+}
+            ).addTo(map_ef3496739b260829988675394e0bc2a8);
+        
+    
+            marker_061f60569ae42f369e6c86e6e703a096.bindTooltip(
+                `<div>
+                     <b>Woodbury School Pantry</b><br>25 N. Broad Street, Woodbury, NJ, 08096, US<br>Time: 4th Wednesday 9:00 AM - 11:00 AM<br>Days: 4th Wednesday 9:00 AM - 11:00 AM
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_a132d13329de63814c9bbf4da193f6a1 = L.marker(
+                [39.8074918, -75.1396116],
+                {
+}
+            ).addTo(map_ef3496739b260829988675394e0bc2a8);
+        
+    
+            marker_a132d13329de63814c9bbf4da193f6a1.bindTooltip(
+                `<div>
+                     <b>Jericho - Deptford Community Development</b><br>981 Mail Avenue, Deptford, NJ, 08096, US<br>Time: 1:00pm-3:00pm<br>Days: Wednesday
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_2f3a2c489594a02c84955b7f34a6733f = L.marker(
+                [39.7164145, -75.0894887],
+                {
+}
+            ).addTo(map_ef3496739b260829988675394e0bc2a8);
+        
+    
+            marker_2f3a2c489594a02c84955b7f34a6733f.bindTooltip(
+                `<div>
+                     <b>Strong Tower Resource Center</b><br>341 Fish Pond Road, Glassboro, NJ, 08028, US<br>Time: 10:00am-12:00pm; Wednesday - Friday 11:00am-12:00pm<br>Days: 1st Saturday; Wednesday - Friday 11:00am-12:00pm
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_c46714501a842ab7cc8f7419d5933096 = L.marker(
+                [39.7052254, -75.1046466],
+                {
+}
+            ).addTo(map_ef3496739b260829988675394e0bc2a8);
+        
+    
+            marker_c46714501a842ab7cc8f7419d5933096.bindTooltip(
+                `<div>
+                     <b>NHP Foundation (Hollybush Gardens)</b><br>300 Ruth Avenue, Glassboro, NJ, 08028, US<br>Time: 10:00am - 12:00pm & 5:00pm - 6:30pm<br>Days: 3rd Wednesday and 4th Monday
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_a8caafb57cc76b8245cf08e20eb81e84 = L.marker(
+                [39.8411918, -75.196519],
+                {
+}
+            ).addTo(map_ef3496739b260829988675394e0bc2a8);
+        
+    
+            marker_a8caafb57cc76b8245cf08e20eb81e84.bindTooltip(
+                `<div>
+                     <b>St. Paul's UM Church</b><br>74 Church Street, West Deptford, NJ, 08086, US<br>Time: 2nd Wednesday 8:30am - 12:30pm<br>Days: 2nd Wednesday 8:30am - 12:30pm
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_39e088049d6f20741090eb24476c2a1e = L.marker(
+                [39.7078879, -75.1104469],
+                {
+}
+            ).addTo(map_ef3496739b260829988675394e0bc2a8);
+        
+    
+            marker_39e088049d6f20741090eb24476c2a1e.bindTooltip(
+                `<div>
+                     <b>St. Thomas Episcopal Church</b><br>212 North Main Street, Glassboro, NJ, 08093, US<br>Time: 9:00am - 1:00pm<br>Days: 2nd Saturday
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_7b5ebbafd9b1f945eaead3989191bd1e = L.marker(
+                [39.7336165, -75.1320938],
+                {
+}
+            ).addTo(map_ef3496739b260829988675394e0bc2a8);
+        
+    
+            marker_7b5ebbafd9b1f945eaead3989191bd1e.bindTooltip(
+                `<div>
+                     <b>The Pitman Pantry</b><br>30 North Broadway, Pitman, NJ, 08103, US<br>Time: N/A<br>Days: Tuesday-Thursday; Tuesday 6 PM - 7 PM; Wednesday 4 PM - 6 PM; Thursday 12 PM - 1
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_6bcb4ecfbbc1fc48cad5316670b3d1ab = L.marker(
+                [39.7261002, -75.1307381],
+                {
+}
+            ).addTo(map_ef3496739b260829988675394e0bc2a8);
+        
+    
+            marker_6bcb4ecfbbc1fc48cad5316670b3d1ab.bindTooltip(
+                `<div>
+                     <b>Joy Community Fellowship</b><br>759 Lincoln Avenue, Pitman, NJ, 08071, US<br>Time: 7:30am - 9:30am<br>Days: 1st & 3rd Saturday
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_d5db01222a7a7fd235d57b2a4b818d4b = L.marker(
+                [39.6846382, -75.1013128],
+                {
+}
+            ).addTo(map_ef3496739b260829988675394e0bc2a8);
+        
+    
+            marker_d5db01222a7a7fd235d57b2a4b818d4b.bindTooltip(
+                `<div>
+                     <b>Healing Wings Community Center</b><br>520 East Stanger Avenue, Glassboro, NJ, 08028, US<br>Time: 9:00am - 1:00pm<br>Days: 2nd & 4th Wednesday
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_5baa21d1a5edd8dce8acd1d3b7e7ae4a = L.marker(
+                [39.6589441, -75.0837585],
+                {
+}
+            ).addTo(map_ef3496739b260829988675394e0bc2a8);
+        
+    
+            marker_5baa21d1a5edd8dce8acd1d3b7e7ae4a.bindTooltip(
+                `<div>
+                     <b>Agape Fellowship Christian Church</b><br>125 East Center Street, Clayton, NJ, 08312, US<br>Time: 3rd Saturday after the 3rd Friday 9:00 AM - 1:00 PM<br>Days: 3rd Saturday after the 3rd Friday 9:00 AM - 1:00 PM
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_4b6e0f276f52a9e28ed927844ee9f21b = L.marker(
+                [39.8263796, -75.2748822],
+                {
+}
+            ).addTo(map_ef3496739b260829988675394e0bc2a8);
+        
+    
+            marker_4b6e0f276f52a9e28ed927844ee9f21b.bindTooltip(
+                `<div>
+                     <b>Glorious Light Christian Ministries</b><br>104 East Broad Street, Paulsboro, NJ, 08066, US<br>Time: 10:30am - 12:30pm<br>Days: Saturday
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_500ca50c60d946de5e0fb761ab9ed053 = L.marker(
+                [39.8207557, -75.3043184],
+                {
+}
+            ).addTo(map_ef3496739b260829988675394e0bc2a8);
+        
+    
+            marker_500ca50c60d946de5e0fb761ab9ed053.bindTooltip(
+                `<div>
+                     <b>Clonmell UMC Loaves Fishes</b><br>516 West Broad Street, Gibbstown, NJ, 08027, US<br>Time: 10:00am - 12:00pm & 4:00pm - 6:00pm<br>Days: 2nd Tuesday
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_6e2aa7c93d88029a21d383c848eb5096 = L.marker(
+                [39.5964633, -75.167588],
+                {
+}
+            ).addTo(map_ef3496739b260829988675394e0bc2a8);
+        
+    
+            marker_6e2aa7c93d88029a21d383c848eb5096.bindTooltip(
+                `<div>
+                     <b>Victory Assembly of God</b><br>317 Harding Highway, Elmer, NJ, 08318, US<br>Time: 9:00am-1:00pm<br>Days: 3rd Saturday
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_650f27616091e35413bc849a2195cecc = L.marker(
+                [39.7481633, -75.3096998],
+                {
+}
+            ).addTo(map_ef3496739b260829988675394e0bc2a8);
+        
+    
+            marker_650f27616091e35413bc849a2195cecc.bindTooltip(
+                `<div>
+                     <b>King's Things</b><br>1402 Kings Highway, Swedesboro, NJ, 08085, US<br>Time: Wednesday & Saturday 10:00am - 12:30pm; Thursday 3:30pm - 6:00pm<br>Days: Wednesday & Saturday 10:00am - 12:30pm; Thursday 3:30pm - 6:00pm
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_621beae7027f0b719f6b3888c680be26 = L.marker(
+                [39.641694, -75.329134],
+                {
+}
+            ).addTo(map_ef3496739b260829988675394e0bc2a8);
+        
+    
+            marker_621beae7027f0b719f6b3888c680be26.bindTooltip(
+                `<div>
+                     <b>Spencer UAME Church</b><br>314 Bailey Street, Woodstown, NJ, 08098, US<br>Time: 9:00am - 1:00pm<br>Days: 4th Saturday
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_8dbfde000acde77333624336e409d46c = L.marker(
+                [39.7109167, -75.4706797],
+                {
+}
+            ).addTo(map_ef3496739b260829988675394e0bc2a8);
+        
+    
+            marker_8dbfde000acde77333624336e409d46c.bindTooltip(
+                `<div>
+                     <b>Mt. Hope UM Church</b><br>364 Broadway Street, Salem, NJ, 08079, US<br>Time: 9:00am -1:00pm<br>Days: 3rd Saturday
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_60d3d26066ea820e00c202ce2f4f3f89 = L.marker(
+                [39.572357, -75.468414],
+                {
+}
+            ).addTo(map_ef3496739b260829988675394e0bc2a8);
+        
+    
+            marker_60d3d26066ea820e00c202ce2f4f3f89.bindTooltip(
+                `<div>
+                     <b>First Baptist Church -Mickey Bowman</b><br>130 West Broadway, Salem, NJ, 08079, US<br>Time: 8:00am - 12:00pm<br>Days: First Baptist Church -Mickey Bowman; 2nd Saturday
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_dc6ac7370049e0919089df19242dc279 = L.marker(
+                [39.570482, -75.46767],
+                {
+}
+            ).addTo(map_ef3496739b260829988675394e0bc2a8);
+        
+    
+            marker_dc6ac7370049e0919089df19242dc279.bindTooltip(
+                `<div>
+                     <b>St. John Pentecostal Church</b><br>22 New Market Street, Salem, NJ, 08079, US<br>Time: 1:00pm-3:00pm<br>Days: Wednesday and Friday; Also open for emergencies by appointment (Monday-Friday)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_fb0395731ee2fc859ef896e79fc8e2c0 = L.marker(
+                [39.6355428, -75.5144394],
+                {
+}
+            ).addTo(map_ef3496739b260829988675394e0bc2a8);
+        
+    
+            marker_fb0395731ee2fc859ef896e79fc8e2c0.bindTooltip(
+                `<div>
+                     <b>Mid-Atlantic States Career & Education Center</b><br>375 South Broadway, Pennsville, NJ, 08070, US<br>Time: distribution starts at 11:15am<br>Days: Monday - Friday
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_746818ce16313cd48e668b6349471f77 = L.marker(
+                [39.6413857, -75.5206748],
+                {
+}
+            ).addTo(map_ef3496739b260829988675394e0bc2a8);
+        
+    
+            marker_746818ce16313cd48e668b6349471f77.bindTooltip(
+                `<div>
+                     <b>Better Tomorrows</b><br>40 Eaton Road, Pennsville, NJ, 08070, US<br>Time: 8:00am - 4:00pm<br>Days: 2nd & 4th Thursday
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+</script>
+</html>
